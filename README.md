@@ -1,0 +1,2 @@
+gs-consuming-rest-core
+======================
