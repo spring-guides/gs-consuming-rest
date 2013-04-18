@@ -41,13 +41,14 @@ public class Main {
 
         RestTemplate restTemplate = new RestTemplate();
 
-        String bodyOfResponse = restTemplate.getForObject(searchUrl, String.class, searchQueryPathVariableValue);
+        String bodyOfResponse = restTemplate.getForObject( 
+                      searchUrl, String.class, searchQueryPathVariableValue);
         // work with the response body
     }
 }
 ```
 
-This is not as useful as you'd think, however, because the Twitter search service returns JSON-structured data. It's easy enough to get meaningful payloads from this, however. The `RestTemplate` supports configuration of `HttpMessageConverter` objects that can convert request and response payloads as appropriate. If the Jackson JSON processing library is on the classpath, then it can be used to convert the requested data into your custom domain objects or - at a minimum - the Jackson `JsonNode` base type. Add the following incantations at the bottom of the `main` method.
+This is not as useful as you'd think, however, because the Twitter search service returns JSON-structured data. It's easy enough to get meaningful payloads from this, however. The `RestTemplate` supports configuration of `HttpMessageConverter` objects that can convert request and response payloads as appropriate. If the Jackson JSON processing library is on the CLASSPATH, then it can be used to convert the requested data into your custom domain objects or - at a minimum - the Jackson `JsonNode` base type. Add the following incantations at the bottom of the `main` method.
 
 >__TODO__: briefly talk about what message converters do and list the ones that come out of the box with Spring}
 
@@ -63,7 +64,7 @@ Now you can iterate over the results in terms of nodes in the JSON structure. If
         HttpHeaders httpHeaders = response.getHeaders();
 ```
 
-Thus far, we've only used the HTTP verb `GET` to make requests against the 
+Thus far, we've only used the HTTP verb `GET` to make calls, but we could just as easily have used `POST`, `PUT`, etc.
 
 Building and Running the Client
 --------------------------------------
@@ -73,8 +74,7 @@ To invoke the code and see the results of the search, simply run it from the com
 $ gradle run
 ```
 	
-This will cause the application to be compiled and then run the main method. 
-
+This will compile the `main` method and then run it.
 
 
 Next Steps
