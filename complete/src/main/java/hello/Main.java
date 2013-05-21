@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 public class Main {
+
     public static void main(String args[]) throws Throwable {
 
         String searchUrl = "http://search.twitter.com/search.json?q={query}";
