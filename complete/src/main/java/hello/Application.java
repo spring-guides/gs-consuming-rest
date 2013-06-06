@@ -1,25 +1,16 @@
 package hello;
 
-import org.codehaus.jackson.JsonNode;
 import org.springframework.web.client.RestTemplate;
 
 public class Application {
 
     public static void main(String args[]) {
-
-        String searchUrl = "http://search.twitter.com/search.json?q={query}";
-        String query = "@gopivotal";
-
         RestTemplate restTemplate = new RestTemplate();
-
-        JsonNode rootNode = restTemplate.getForObject(
-            searchUrl, JsonNode.class, query);
-
-        for (JsonNode result : rootNode.get("results")) {
-            System.out.println(
-                String.format("Tweet: @%s said \"%s\"",
-                    result.get("from_user").getTextValue(), result.get("text").getTextValue()));
-        }
+        Page page = restTemplate.getForObject("http://graph.facebook.com/gopivotal", Page.class);
+        System.out.println("Name:    " + page.getName());
+        System.out.println("About:   " + page.getAbout());
+        System.out.println("Phone:   " + page.getPhone());
+        System.out.println("Website: " + page.getWebsite());
     }
 
 }
