@@ -1,96 +1,119 @@
-Getting Started: Consuming RESTful Web Services with Spring
-=========================================
+# Getting Started: Consuming RESTful Web Services with Spring
 
-This guide walks you through the process of using Spring's `RestTemplate` to consume a RESTful web service.
+What you'll build
+-----------------
 
-To help you get started, here's an initial project structure in GitHub:
+This guide walks you through using Spring's `RestTemplate` to consume a RESTful web service. Specifically, you'll use `RestTemplate` to retrieve a company's page data from Facebook's Graph API at:
 
-```sh
-$ git clone https://github.com/springframework-meta/gs-consuming-rest-core.git
-```
+    http://graph.facebook.com/gopivotal
 
-Before you can write the REST endpoint itself, there's some initial project setup that's required. Or, you can skip straight to the [fun part]().
+What you'll need
+----------------
 
-Select dependencies
-----------------------
-The sample in this guide uses Spring and the Jackson JSON processor. Thus you need to declare the following library dependencies in your build:
+ - About 15 minutes
+ - {!include#prereq-editor-jdk-buildtools}
 
-  - org.springframework:spring-web:3.2.2.RELEASE
-  - org.codehaus.jackson:jackson-mapper-asl:1.9.9
+## {!include#how-to-complete-this-guide}
 
-Click here for details on how to map these dependencies to your specific build tool.
+<a name="scratch"></a>
+Set up the project
+------------------
 
-Invoke REST services with the RestTemplate
-----------------------------
-Spring provides a convenient template class called the `RestTemplate`. The `RestTemplate` makes interacting with most RESTful services a one-line incantation. The following example establishes a few variables and then makes a request to the Twitter search service. The result comes back - in this case - as a String that we can print to the console. 
+{!include#build-system-intro}
 
+{!include#create-directory-structure-hello}
 
-```java
-package hello;
+### Create a Maven POM
 
-import org.codehaus.jackson.JsonNode;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestTemplate;
+    {!include:initial/pom.xml}
 
-public class Main {
-    public static void main(String args[]) throws Throwable {
+{!include#bootstrap-starter-pom-disclaimer}
 
-        String searchUrl = "http://search.twitter.com/search.json?q={query}";
-        String searchQueryPathVariableValue = "@gopivotal";
+<a name="initial"></a>
+Fetching a REST resource
+------------------------
 
-        RestTemplate restTemplate = new RestTemplate();
+With project setup complete, you can now create a simple application that consumes a RESTful service.
 
-        String bodyOfResponse = restTemplate.getForObject( 
-                      searchUrl, String.class, searchQueryPathVariableValue);
-        // work with the response body
-    }
+Suppose that you want to find out what Facebook knows about Pivotal. Knowing that Pivotal has a page on Facebook and that the ID it "gopivotal", you should be able to query Facebook's Graph API via this URL:
+
+    http://graph.facebook.com/gopivotal
+
+In fact, if you request that URL through your web browser or curl, you'll receive a JSON document back that looks a little something like this:
+
+```javascript
+{
+   "id": "161112704050757",
+   "about": "At Pivotal, our mission is to enable customers to build a new class of applications, leveraging big and fast data, and do all of this with the power of cloud independence. ",
+   "app_id": "0",
+   "can_post": false,
+   "category": "Internet/software",
+   "checkins": 0,
+   "cover": {
+      "cover_id": 163344023827625,
+      "source": "http://sphotos-d.ak.fbcdn.net/hphotos-ak-frc1/s720x720/554668_163344023827625_839302172_n.png",
+      "offset_y": 0,
+      "offset_x": 0
+   },
+   "founded": "2013",
+   "has_added_app": false,
+   "is_community_page": false,
+   "is_published": true,
+   "likes": 126,
+   "link": "https://www.facebook.com/gopivotal",
+   "location": {
+      "street": "1900 South Norfolk St.",
+      "city": "San Mateo",
+      "state": "CA",
+      "country": "United States",
+      "zip": "94403",
+      "latitude": 37.552261,
+      "longitude": -122.292152
+   },
+   "name": "Pivotal",
+   "phone": "650-286-8012",
+   "talking_about_count": 15,
+   "username": "gopivotal",
+   "website": "http://www.gopivotal.com",
+   "were_here_count": 0
 }
 ```
 
-This is not as useful as you'd think, because the Twitter search service returns JSON-structured data. It's easy enough to get meaningful payloads from this, however. The `RestTemplate` supports configuration of `HttpMessageConverter` objects that can convert request and response payloads as appropriate. If the Jackson JSON processing library is on the classpath, you can use it to convert the requested data into your custom domain objects, or at a minimum, the Jackson `JsonNode` base type.
+Easy enough, but not terribly useful when fetched through a browser or through curl.
 
-Add the following incantations at the bottom of the `main` method.
+A more useful way to consume a REST web service is programmatically. To help you with that task, Spring provides a convenient template class called [`RestTemplate`](http://static.springsource.org/spring/docs/4.0.x/javadoc-api/org/springframework/http/converter/HttpMessageConverter.html). `RestTemplate` makes interacting with most RESTful services a one-line incantation. And it can even bind that data to custom domain types.
 
->__TODO__: briefly talk about what message converters do and list the ones that come out of the box with Spring}
+First, you'll need to create a domain class to contain the data that you're interested in. If all you need to know are Pivotal's name, phone number, website URL, and what the gopivotal page is about, then the following domain class should do fine:
 
-```java
-        JsonNode rootNode = restTemplate.getForObject(searchUrl, JsonNode.class, searchQueryPathVariableValue);
-```
+    {!include:complete/src/main/java/hello/Page.java}
 
-Now you can iterate over the results in terms of nodes in the JSON structure. If you want to inspect the HTTP headers of the response, or the status code, use the `*forEntity` variant methods of the `RestTemplate` that return the payload, as before, along with an envelope (`ResponseEntity`) that has details about headers, status code, and so forth. Add this to the bottom of your `main` method:
+As you can see, this is a simple Java class with a handful of properties and matching getter methods. It's annotated with `@JsonIgnoreProperties` from the Jackson JSON processing library to indicate that any properties not bound in this type should be ignored.
 
-```java
-        ResponseEntity<JsonNode> response = restTemplate.getForEntity(
-                    searchUrl, JsonNode.class, searchQueryPathVariableValue);
-        HttpHeaders httpHeaders = response.getHeaders();
-```
+Now you can write the main class that uses `RestTemplate` to fetch the data from Pivotal's page at Facebook into a `Page` object.
 
-Thus far, you've only used the HTTP verb `GET` to make calls, but you could use `POST`, `PUT`, and so on.
+    {!include:complete/src/main/java/hello/Application.java}
 
-Build and run the client
---------------------------------------
-To invoke the code and see the results of the search, simply run it from the command line:
+Because the Jackson JSON processing library is in the classpath, `RestTemplate` will use it (via a [message converter](http://static.springsource.org/spring/docs/4.0.x/javadoc-api/org/springframework/http/converter/HttpMessageConverter.html)) to convert the incoming JSON data into a `Page` object. From there, the contents of the `Page` object will be printed to the console.
+
+Here you've only used `RestTemplate` to make an HTTP `GET` request. But `RestTemplate` also supports other HTTP verbs such as `POST`, `PUT`, and `DELETE`.
+
+## {!include#build-an-executable-jar}
+
+Run the application
+-------------------
+Run your application with `java -jar` at the command line:
+
+    java -jar target/gs-consuming-rest-0.1.0.jar
+
+You should see the following output:
 
 ```sh
-$ gradle run
+Name:    Pivotal
+About:   At Pivotal, our mission is to enable customers to build a new class of applications, leveraging big and fast data, and do all of this with the power of cloud independence. 
+Phone:   650-286-8012
+Website: http://www.gopivotal.com
 ```
-	
-This command compiles the `main` method and then run it.
-
 
 Next steps
 ----------
 Congratulations! You have just developed a simple REST client using Spring.  
-
-There's more to building and working with REST APIs than is covered here. You may want to continue your exploration of Spring and REST with the following Getting Started guides:
-
-* **Consuming REST Services on Android**
-* Handling POST, PUT, and GET requests in REST endpoints
-* Creating self-describing APIs with HATEOAS
-* Securing a REST endpoint with HTTP Basic
-* Securing a REST endpoint with OAuth
-* Consuming REST APIs
-* Testing REST APIs
-
-
