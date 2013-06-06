@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.springframework</groupId>
-    <artifactId>gs-consuming-rest-complete</artifactId>
+    <artifactId>gs-consuming-rest</artifactId>
     <version>0.1.0</version>
 
     <parent>
@@ -27,7 +27,7 @@
     </dependencies>
 
     <properties>
-        <start-class>hello.Main</start-class>
+        <start-class>hello.Application</start-class>
     </properties>
 
     <build>
@@ -46,12 +46,22 @@
             <url>http://repo.springsource.org/snapshot</url>
             <snapshots><enabled>true</enabled></snapshots>
         </repository>
+        <repository>
+            <id>spring-milestones</id>
+            <url>http://repo.springsource.org/milestone</url>
+            <snapshots><enabled>false</enabled></snapshots>
+        </repository>
     </repositories>
     <pluginRepositories>
         <pluginRepository>
             <id>spring-snapshots</id>
             <url>http://repo.springsource.org/snapshot</url>
             <snapshots><enabled>true</enabled></snapshots>
+        </pluginRepository>
+        <pluginRepository>
+            <id>spring-milestones</id>
+            <url>http://repo.springsource.org/milestone</url>
+            <snapshots><enabled>false</enabled></snapshots>
         </pluginRepository>
     </pluginRepositories>
 </project>
