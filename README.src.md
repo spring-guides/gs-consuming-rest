@@ -30,16 +30,16 @@ Set up the project
 {!include#bootstrap-starter-pom-disclaimer}
 
 <a name="initial"></a>
-Fetching a REST resource
+Fetch a REST resource
 ------------------------
 
-With project setup complete, you can now create a simple application that consumes a RESTful service.
+With project setup complete, you can create a simple application that consumes a RESTful service.
 
-Suppose that you want to find out what Facebook knows about Pivotal. Knowing that Pivotal has a page on Facebook and that the ID it "gopivotal", you should be able to query Facebook's Graph API via this URL:
+Suppose that you want to find out what Facebook knows about Pivotal. Knowing that Pivotal has a page on Facebook and that the ID is "gopivotal", you should be able to query Facebook's Graph API via this URL:
 
     http://graph.facebook.com/gopivotal
 
-In fact, if you request that URL through your web browser or curl, you'll receive a JSON document back that looks a little something like this:
+If you request that URL through your web browser or curl, you'll receive a JSON document that looks something like this:
 
 ```javascript
 {
@@ -83,12 +83,13 @@ Easy enough, but not terribly useful when fetched through a browser or through c
 
 A more useful way to consume a REST web service is programmatically. To help you with that task, Spring provides a convenient template class called [`RestTemplate`](http://static.springsource.org/spring/docs/4.0.x/javadoc-api/org/springframework/http/converter/HttpMessageConverter.html). `RestTemplate` makes interacting with most RESTful services a one-line incantation. And it can even bind that data to custom domain types.
 
-First, you'll need to create a domain class to contain the data that you're interested in. If all you need to know are Pivotal's name, phone number, website URL, and what the gopivotal page is about, then the following domain class should do fine:
+First, create a domain class to contain the data that you need. If all you need to know are Pivotal's name, phone number, website URL, and what the gopivotal page is about, then the following domain class should do fine:
 
     {!include:complete/src/main/java/hello/Page.java}
 
 As you can see, this is a simple Java class with a handful of properties and matching getter methods. It's annotated with `@JsonIgnoreProperties` from the Jackson JSON processing library to indicate that any properties not bound in this type should be ignored.
 
+## Create a main class
 Now you can write the main class that uses `RestTemplate` to fetch the data from Pivotal's page at Facebook into a `Page` object.
 
     {!include:complete/src/main/java/hello/Application.java}
