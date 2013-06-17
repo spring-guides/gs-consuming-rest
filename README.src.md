@@ -115,6 +115,6 @@ Phone:   650-286-8012
 Website: http://www.gopivotal.com
 ```
 
-Next steps
+Summary
 ----------
 Congratulations! You have just developed a simple REST client using Spring.  
