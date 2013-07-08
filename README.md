@@ -1,3 +1,4 @@
+
 # Getting Started: Consuming RESTful Web Services with Spring
 
 What you'll build
@@ -28,11 +29,12 @@ To **start from scratch**, move on to [Set up the project](#scratch).
 To **skip the basics**, do the following:
 
  - [Download][zip] and unzip the source repository for this guide, or clone it using [git](/understanding/git):
-`git clone https://github.com/springframework-meta/{@project-name}.git`
- - cd into `{@project-name}/initial`
- - Jump ahead to [Create a resource representation class](#initial).
+`git clone https://github.com/springframework-meta/gs-consuming-rest.git`
+ - cd into `gs-consuming-rest/initial`
+ - Jump ahead to [Fetch a REST resource](#initial).
 
-**When you're finished**, you can check your results against the code in `{@project-name}/complete`.
+**When you're finished**, you can check your results against the code in `gs-consuming-rest/complete`.
+[zip]: https://github.com/springframework-meta/gs-consuming-rest/archive/master.zip
 
 <a name="scratch"></a>
 Set up the project
@@ -80,6 +82,19 @@ In a project directory of your choosing, create the following subdirectory struc
             <version>1.9.9</version>
         </dependency>
     </dependencies>
+
+    <properties>
+        <start-class>hello.Application</start-class>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
     <!-- TODO: remove once bootstrap goes GA -->
     <repositories>
@@ -268,6 +283,8 @@ Run the application
 Run your application with `java -jar` at the command line:
 
     java -jar target/gs-consuming-rest-0.1.0.jar
+
+
 
 You should see the following output:
 
