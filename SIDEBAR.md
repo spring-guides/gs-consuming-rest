@@ -4,11 +4,11 @@ There's more to consuming RESTful web services than is covered here. You may wan
 
 ### Getting Started Guides
 
-* [Consuming RESTful web services on Android][gs-consuming-rest-android]
-* [Consuming XML from a RESTful Web Service on Android][gs-consuming-rest-xml-android]
+* [Consuming RESTful Web Services on Android][gs-consuming-rest-android]
+* [Consuming XML From a RESTful Web Service on Android][gs-consuming-rest-xml-android]
 * [Accessing Facebook Data][gs-accessing-facebook]
 * [Accessing Twitter Data][gs-accessing-twitter]
-* [Building a RESTful web service][gs-rest-service]
+* [Building a RESTful Web Service][gs-rest-service]
 * [Building a Hypermedia Driven REST Web Service][gs-rest-hateoas]
 
 [gs-rest-service]: /guides/gs/rest-service/content
