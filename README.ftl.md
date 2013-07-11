@@ -1,11 +1,11 @@
 <#assign project_id="gs-consuming-rest">
 
-# Getting Started: Consuming RESTful Web Services with Spring
+# Getting Started: Consuming a RESTful Web Service
 
 What you'll build
 -----------------
 
-This guide walks you through using Spring's `RestTemplate` to consume a RESTful web service. Specifically, you'll use `RestTemplate` to retrieve a company's page data from Facebook's Graph API at:
+This guide walks you through the process of building an application that uses Spring's `RestTemplate` to consume a RESTful web service. Specifically, you'll use `RestTemplate` to retrieve a company's page data from Facebook's Graph API at:
 
     http://graph.facebook.com/gopivotal
 
@@ -91,7 +91,12 @@ First, create a domain class to contain the data that you need. If all you need 
 
 As you can see, this is a simple Java class with a handful of properties and matching getter methods. It's annotated with `@JsonIgnoreProperties` from the Jackson JSON processing library to indicate that any properties not bound in this type should be ignored.
 
-## Create a main class
+Make the application executable
+-------------------------------
+
+Although it is possible to package this service as a traditional [WAR][u-war] file for deployment to an external application server, the simpler approach demonstrated below creates a standalone application. You package everything in a single, executable JAR file, driven by a good old Java `main()` method. Along the way, you use Spring's support for embedding the [Tomcat][u-tomcat] servlet container as the HTTP runtime, instead of deploying to an external instance.
+
+### Create a main class
 Now you can write the main class that uses `RestTemplate` to fetch the data from Pivotal's page at Facebook into a `Page` object.
 
     <@snippet path="src/main/java/hello/Application.java" prefix="complete"/>
@@ -100,7 +105,7 @@ Because the Jackson JSON processing library is in the classpath, `RestTemplate` 
 
 Here you've only used `RestTemplate` to make an HTTP `GET` request. But `RestTemplate` also supports other HTTP verbs such as `POST`, `PUT`, and `DELETE`.
 
-## <@build_an_executable_jar/>
+### <@build_an_executable_jar/>
 
 <@run_the_application/>
 
