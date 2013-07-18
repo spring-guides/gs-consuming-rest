@@ -105,7 +105,9 @@ Because the Jackson JSON processing library is in the classpath, `RestTemplate` 
 
 Here you've only used `RestTemplate` to make an HTTP `GET` request. But `RestTemplate` also supports other HTTP verbs such as `POST`, `PUT`, and `DELETE`.
 
-### <@build_an_executable_jar/>
+<@build_an_executable_jar_subhead/>
+
+<@build_an_executable_jar/>
 
 <@run_the_application/>
 
