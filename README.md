@@ -1,6 +1,4 @@
 
-# Getting Started: Consuming a RESTful Web Service
-
 What you'll build
 -----------------
 
