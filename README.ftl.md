@@ -107,7 +107,7 @@ Here you've only used `RestTemplate` to make an HTTP `GET` request. But `RestTem
 
 <@build_an_executable_jar/>
 
-<@run_the_application/>
+<@run_the_application_with_maven/>
 
 You should see the following output:
 
