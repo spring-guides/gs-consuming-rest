@@ -84,24 +84,24 @@ In a project directory of your choosing, create the following subdirectory struc
     <repositories>
         <repository>
             <id>spring-snapshots</id>
-            <url>http://repo.springsource.org/snapshot</url>
+            <url>http://repo.springsource.org/libs-snapshot</url>
             <snapshots><enabled>true</enabled></snapshots>
         </repository>
         <repository>
             <id>spring-milestones</id>
-            <url>http://repo.springsource.org/milestone</url>
+            <url>http://repo.springsource.org/libs-milestone</url>
             <snapshots><enabled>false</enabled></snapshots>
         </repository>
     </repositories>
     <pluginRepositories>
         <pluginRepository>
             <id>spring-snapshots</id>
-            <url>http://repo.springsource.org/snapshot</url>
+            <url>http://repo.springsource.org/libs-snapshot</url>
             <snapshots><enabled>true</enabled></snapshots>
         </pluginRepository>
         <pluginRepository>
             <id>spring-milestones</id>
-            <url>http://repo.springsource.org/milestone</url>
+            <url>http://repo.springsource.org/libs-milestone</url>
             <snapshots><enabled>false</enabled></snapshots>
         </pluginRepository>
     </pluginRepositories>
