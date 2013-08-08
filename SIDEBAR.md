@@ -11,12 +11,12 @@ There's more to consuming RESTful web services than what is covered here. You ca
 * [Building a RESTful Web Service][gs-rest-service]
 * [Building a Hypermedia-Driven REST Web Service][gs-rest-hateoas]
 
-[gs-rest-service]: /guides/gs/rest-service/content
-[gs-consuming-rest-android]: /guides/gs/consuming-rest-android/content
-[gs-rest-hateoas]: /guides/gs/rest-hateoas/content
-[gs-consuming-rest-xml-android]: /guides/gs/consuming-rest-xml-android/content
-[gs-accessing-facebook]: /guides/gs/accessing-facebook/content
-[gs-accessing-twitter]: /guides/gs/accessing-twitter/content
+[gs-rest-service]: /guides/gs/rest-service/
+[gs-consuming-rest-android]: /guides/gs/consuming-rest-android/
+[gs-rest-hateoas]: /guides/gs/rest-hateoas/
+[gs-consuming-rest-xml-android]: /guides/gs/consuming-rest-xml-android/
+[gs-accessing-facebook]: /guides/gs/accessing-facebook/
+[gs-accessing-twitter]: /guides/gs/accessing-twitter/
 
 ### Tutorials
 
