@@ -1,8 +1,9 @@
+This guide walks you through the process of building an application that uses Spring's `RestTemplate` to consume a RESTful web service.
 
 What you'll build
 -----------------
 
-This guide walks you through the process of building an application that uses Spring's `RestTemplate` to consume a RESTful web service. Specifically, you'll use `RestTemplate` to retrieve a company's page data from Facebook's Graph API at:
+Specifically, you'll use `RestTemplate` to retrieve a company's page data from Facebook's Graph API at:
 
     http://graph.facebook.com/gopivotal
 
@@ -38,7 +39,7 @@ To **skip the basics**, do the following:
 Set up the project
 ------------------
 
-First you set up a basic build script. You can use any build system you like when building apps with Spring, but the code you need to work with [Maven](https://maven.apache.org) and [Gradle](http://gradle.org) is included here. If you're not familiar with either, refer to [Building Java Projects with Maven](/guides/gs/maven/) or [Building Java Projects with Gradle](/guides/gs/gradle/).
+First you set up a basic build script. You can use any build system you like when building apps with Spring, but the code you need to work with [Maven](https://maven.apache.org) and [Gradle](http://gradle.org) is included here. If you're not familiar with either, refer to [Building Java Projects with Maven](/guides/gs/maven) or [Building Java Projects with Gradle](/guides/gs/gradle/).
 
 ### Create the directory structure
 

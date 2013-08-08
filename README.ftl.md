@@ -1,9 +1,10 @@
 <#assign project_id="gs-consuming-rest">
+This guide walks you through the process of building an application that uses Spring's `RestTemplate` to consume a RESTful web service.
 
 What you'll build
 -----------------
 
-This guide walks you through the process of building an application that uses Spring's `RestTemplate` to consume a RESTful web service. Specifically, you'll use `RestTemplate` to retrieve a company's page data from Facebook's Graph API at:
+Specifically, you'll use `RestTemplate` to retrieve a company's page data from Facebook's Graph API at:
 
     http://graph.facebook.com/gopivotal
 
