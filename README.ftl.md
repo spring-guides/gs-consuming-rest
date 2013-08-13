@@ -1,10 +1,10 @@
 <#assign project_id="gs-consuming-rest">
-This guide walks you through the process of building an application that uses Spring's `RestTemplate` to consume a RESTful web service.
+This guide walks you through the process of creating an application that consumes a RESTful web service.
 
 What you'll build
 -----------------
 
-Specifically, you'll use `RestTemplate` to retrieve a company's page data from Facebook's Graph API at:
+You'll build an application that uses Spring's `RestTemplate` to retrieve a company's page data from Facebook's Graph API at:
 
     http://graph.facebook.com/gopivotal
 
@@ -95,8 +95,8 @@ Make the application executable
 
 Although it is possible to package this service as a traditional [WAR][u-war] file for deployment to an external application server, the simpler approach demonstrated below creates a standalone application. You package everything in a single, executable JAR file, driven by a good old Java `main()` method. Along the way, you use Spring's support for embedding the [Tomcat][u-tomcat] servlet container as the HTTP runtime, instead of deploying to an external instance.
 
-### Create a main class
-Now you can write the main class that uses `RestTemplate` to fetch the data from Pivotal's page at Facebook into a `Page` object.
+### Create an Application class
+Now you can write the `Application` class that uses `RestTemplate` to fetch the data from Pivotal's page at Facebook into a `Page` object.
 
     <@snippet path="src/main/java/hello/Application.java" prefix="complete"/>
 
