@@ -1,15 +1,15 @@
-## Related Resources
+## Related resources
 
-There's more to consuming RESTful web services than what is covered here. You can continue your exploration of Spring and REST with the following resources.
+There's more to consuming RESTful web services than what is covered here. You can continue to explore Spring and REST with the following resources.
 
-### Getting Started Guides
+### Getting Started guides
 
-* [Consuming REST Web Services with Spring for Android][gs-consuming-rest-android]
-* [Consuming XML from a REST Service with Spring for Android][gs-consuming-rest-xml-android]
+* [Consuming RESTful Web Services with Spring for Android][gs-consuming-rest-android]
+* [Consuming XML from a RESTful Web Service with Spring for Android][gs-consuming-rest-xml-android]
 * [Accessing Facebook Data][gs-accessing-facebook]
 * [Accessing Twitter Data][gs-accessing-twitter]
 * [Building a RESTful Web Service][gs-rest-service]
-* [Building a Hypermedia-Driven REST Web Service][gs-rest-hateoas]
+* [Building a Hypermedia-Driven RESTful Web Service][gs-rest-hateoas]
 
 [gs-rest-service]: /guides/gs/rest-service/
 [gs-consuming-rest-android]: /guides/gs/consuming-rest-android/
@@ -24,7 +24,7 @@ There's more to consuming RESTful web services than what is covered here. You ca
 
 [tut-rest]: /guides/tutorials/rest
 
-### Concepts and Technologies
+### Concepts and technologies
 
 * [REST][u-rest]
 * [JSON][u-json]
