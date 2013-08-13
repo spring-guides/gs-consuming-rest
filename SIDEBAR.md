@@ -29,5 +29,5 @@ There's more to consuming RESTful web services than what is covered here. You ca
 * [REST][u-rest]
 * [JSON][u-json]
 
-<@u_rest/>
-<@u_json/>
+[u-rest]: /understanding/REST
+[u-json]: /understanding/JSON
