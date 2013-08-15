@@ -27,13 +27,14 @@ To **start from scratch**, move on to [Set up the project](#scratch).
 
 To **skip the basics**, do the following:
 
- - [Download][zip] and unzip the source repository for this guide, or clone it using [git](/understanding/git):
+ - [Download][zip] and unzip the source repository for this guide, or clone it using [git][u-git]:
 `git clone https://github.com/springframework-meta/gs-consuming-rest.git`
  - cd into `gs-consuming-rest/initial`.
  - Jump ahead to [Fetch a REST resource](#initial).
 
 **When you're finished**, you can check your results against the code in `gs-consuming-rest/complete`.
 [zip]: https://github.com/springframework-meta/gs-consuming-rest/archive/master.zip
+[u-git]: /understanding/Git
 
 <a name="scratch"></a>
 Set up the project
