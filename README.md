@@ -75,12 +75,12 @@ In a project directory of your choosing, create the following subdirectory struc
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
-            <version>3.2.2.RELEASE</version>
+            <version>3.2.4.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-mapper-asl</artifactId>
-            <version>1.9.9</version>
+            <version>1.9.13</version>
         </dependency>
     </dependencies>
 
@@ -113,8 +113,6 @@ In a project directory of your choosing, create the following subdirectory struc
 ```
 
 This guide is using [Spring Boot's starter POMs](/guides/gs/spring-boot/).
-
-**Note:** If you are using Maven and are unaccustomed to using an external parent project: you can take it out later, it's just there to reduce the amount of code you have to write to get started.
 
 <a name="initial"></a>
 Fetch a REST resource
