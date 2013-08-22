@@ -78,7 +78,7 @@ repositories {
 }
 
 dependencies {
-    compile("org.springframework:spring-web:3.2.4.RELEASE")
+    compile("org.springframework:spring-web:4.0.0.M2")
     compile("org.codehaus.jackson:jackson-mapper-asl:1.9.13")
     testCompile("junit:junit:4.11")
 }
