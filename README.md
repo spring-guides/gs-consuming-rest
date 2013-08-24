@@ -29,12 +29,12 @@ To **start from scratch**, move on to [Set up the project](#scratch).
 To **skip the basics**, do the following:
 
  - [Download][zip] and unzip the source repository for this guide, or clone it using [Git][u-git]:
-`git clone https://github.com/springframework-meta/gs-consuming-rest.git`
+`git clone https://github.com/spring-guides/gs-consuming-rest.git`
  - cd into `gs-consuming-rest/initial`.
  - Jump ahead to [Fetch a REST resource](#initial).
 
 **When you're finished**, you can check your results against the code in `gs-consuming-rest/complete`.
-[zip]: https://github.com/springframework-meta/gs-consuming-rest/archive/master.zip
+[zip]: https://github.com/spring-guides/gs-consuming-rest/archive/master.zip
 [u-git]: /understanding/Git
 
 <a name="scratch"></a>
@@ -54,7 +54,7 @@ In a project directory of your choosing, create the following subdirectory struc
 
 
 ### Create a Gradle build file
-Below is the [initial Gradle build file](https://github.com/springframework-meta/gs-consuming-rest/blob/master/initial/build.gradle). But you can also use Maven. The pom.xml file is included [right here](https://github.com/springframework-meta/gs-consuming-rest/blob/master/initial/pom.xml).
+Below is the [initial Gradle build file](https://github.com/spring-guides/gs-consuming-rest/blob/master/initial/build.gradle). But you can also use Maven. The pom.xml file is included [right here](https://github.com/spring-guides/gs-consuming-rest/blob/master/initial/pom.xml).
 
 `build.gradle`
 ```gradle
@@ -221,7 +221,7 @@ Here you've only used `RestTemplate` to make an HTTP `GET` request. But `RestTem
 
 Now that your `Application` class is ready, you simply instruct the build system to create a single, executable jar containing everything. This makes it easy to ship, version, and deploy the service as an application throughout the development lifecycle, across different environments, and so forth.
 
-Below are the Gradle steps, but if you are using Maven, you can find the updated pom.xml [right here](https://github.com/springframework-meta/gs-consuming-rest/blob/master/complete/pom.xml) and build it by typing `mvn clean package`.
+Below are the Gradle steps, but if you are using Maven, you can find the updated pom.xml [right here](https://github.com/spring-guides/gs-consuming-rest/blob/master/complete/pom.xml) and build it by typing `mvn clean package`.
 
 Update your Gradle `build.gradle` file's `buildscript` section, so that it looks like this:
 
@@ -242,7 +242,7 @@ Further down inside `build.gradle`, add the following to the list of applied plu
 ```groovy
 apply plugin: 'spring-boot'
 ```
-You can see the final version of `build.gradle` [right here]((https://github.com/springframework-meta/gs-consuming-rest/blob/master/complete/build.gradle).
+You can see the final version of `build.gradle` [right here]((https://github.com/spring-guides/gs-consuming-rest/blob/master/complete/build.gradle).
 
 The [Spring Boot gradle plugin][spring-boot-gradle-plugin] collects all the jars on the classpath and builds a single "über-jar", which makes it more convenient to execute and transport your service.
 It also searches for the `public static void main()` method to flag as a runnable class.
