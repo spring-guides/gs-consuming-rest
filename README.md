@@ -82,9 +82,9 @@ repositories {
 }
 
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter:0.5.0.M5")
-    compile("org.springframework:spring-web:4.0.0.M3")
-    compile("org.codehaus.jackson:jackson-mapper-asl:1.9.13")
+    compile("org.springframework.boot:spring-boot-starter:0.5.0.M6")
+    compile("org.springframework:spring-web:4.0.0.RC1")
+    compile("com.fasterxml.jackson.core:jackson-databind:2.2.2")
     testCompile("junit:junit:4.11")
 }
 
@@ -157,9 +157,9 @@ First, create a domain class to contain the data that you need. If all you need 
 ```java
 package hello;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Page {
 
     private String name;
@@ -235,7 +235,7 @@ buildscript {
         mavenLocal()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:0.5.0.M4")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:0.5.0.M6")
     }
 }
 ```
