@@ -1,37 +1,45 @@
-<#assign project_id="gs-consuming-rest">
+:spring_boot_version: 0.5.0.M6
+:RestTemplate: http://docs.spring.io/spring/docs/4.0.x/javadoc-api/org/springframework/web/client/RestTemplate.html
+:HttpMessageConverter: http://docs.spring.io/spring/docs/4.0.x/javadoc-api/org/springframework/http/converter/HttpMessageConverter.html
+:toc:
+:icons: font
+:source-highlighter: prettify
+:project_id: gs-consuming-rest
 This guide walks you through the process of creating an application that consumes a RESTful web service.
 
-What you'll build
------------------
+== What you'll build
 
 You'll build an application that uses Spring's `RestTemplate` to retrieve a company's page data from Facebook's Graph API at:
 
     http://graph.facebook.com/gopivotal
 
-What you'll need
-----------------
+== What you'll need
 
- - About 15 minutes
- - <@prereq_editor_jdk_buildtools/>
+include::https://raw.github.com/spring-guides/getting-started-macros/master/prereq_editor_jdk_buildtools.adoc[]
 
-## <@how_to_complete_this_guide jump_ahead='Fetch a REST resource'/>
+include::https://raw.github.com/spring-guides/getting-started-macros/master/how_to_complete_this_guide.adoc[]
 
-<a name="scratch"></a>
-Set up the project
-------------------
+[[scratch]]
+== Set up the project
 
-<@build_system_intro/>
+include::https://raw.github.com/spring-guides/getting-started-macros/master/build_system_intro.adoc[]
 
-<@create_directory_structure_hello/>
+include::https://raw.github.com/spring-guides/getting-started-macros/master/create_directory_structure_hello.adoc[]
 
 
-<@create_both_builds/>
+include::https://raw.github.com/spring-guides/getting-started-macros/master/create_both_builds.adoc[]
 
-<@bootstrap_starter_pom_disclaimer/>
+`build.gradle`
+// AsciiDoc source formatting doesn't support groovy, so using java instead
+[source,java]
+----
+include::initial/build.gradle[]
+----
 
-<a name="initial"></a>
-Fetch a REST resource
-------------------------
+include::https://raw.github.com/spring-guides/getting-started-macros/master/bootstrap_starter_pom_disclaimer.adoc[]
+
+[[initial]]
+== Fetch a REST resource
 
 With project setup complete, you can create a simple application that consumes a RESTful service.
 
@@ -41,7 +49,8 @@ Suppose that you want to find out what Facebook knows about Pivotal. Knowing tha
 
 If you request that URL through your web browser or curl, you'll receive a JSON document that looks something like this:
 
-```javascript
+[source,javascript]
+----
 {
    "id": "161112704050757",
    "about": "At Pivotal, our mission is to enable customers to build a new class of applications, leveraging big and fast data, and do all of this with the power of cloud independence. ",
@@ -77,47 +86,52 @@ If you request that URL through your web browser or curl, you'll receive a JSON 
    "website": "http://www.gopivotal.com",
    "were_here_count": 0
 }
-```
+----
 
 Easy enough, but not terribly useful when fetched through a browser or through curl.
 
-A more useful way to consume a REST web service is programmatically. To help you with that task, Spring provides a convenient template class called [`RestTemplate`](http://static.springsource.org/spring/docs/4.0.x/javadoc-api/org/springframework/http/converter/HttpMessageConverter.html). `RestTemplate` makes interacting with most RESTful services a one-line incantation. And it can even bind that data to custom domain types.
+A more useful way to consume a REST web service is programmatically. To help you with that task, Spring provides a convenient template class called {RestTemplate}[`RestTemplate`]. `RestTemplate` makes interacting with most RESTful services a one-line incantation. And it can even bind that data to custom domain types.
 
 First, create a domain class to contain the data that you need. If all you need to know are Pivotal's name, phone number, website URL, and what the gopivotal page is about, then the following domain class should do fine:
 
-    <@snippet path="src/main/java/hello/Page.java" prefix="complete"/>
+`src/main/java/hello/Page.java`
+[source,java]
+----
+include::complete/src/main/java/hello/Page.java[]
+----
 
 As you can see, this is a simple Java class with a handful of properties and matching getter methods. It's annotated with `@JsonIgnoreProperties` from the Jackson JSON processing library to indicate that any properties not bound in this type should be ignored.
 
-Make the application executable
--------------------------------
+== Make the application executable
 
-Although it is possible to package this service as a traditional [WAR][u-war] file for deployment to an external application server, the simpler approach demonstrated below creates a standalone application. You package everything in a single, executable JAR file, driven by a good old Java `main()` method. Along the way, you use Spring's support for embedding the [Tomcat][u-tomcat] servlet container as the HTTP runtime, instead of deploying to an external instance.
+Although it is possible to package this service as a traditional link:/understanding/WAR[WAR] file for deployment to an external application server, the simpler approach demonstrated below creates a standalone application. You package everything in a single, executable JAR file, driven by a good old Java `main()` method. Along the way, you use Spring's support for embedding the link:/understanding/Tomcat[Tomcat] servlet container as the HTTP runtime, instead of deploying to an external instance.
 
-### Create an Application class
 Now you can write the `Application` class that uses `RestTemplate` to fetch the data from Pivotal's page at Facebook into a `Page` object.
 
-    <@snippet path="src/main/java/hello/Application.java" prefix="complete"/>
+`src/main/java/hello/Application.java`
+[source,java]
+----
+include::complete/src/main/java/hello/Application.java[]
+----
 
-Because the Jackson JSON processing library is in the classpath, `RestTemplate` will use it (via a [message converter](http://static.springsource.org/spring/docs/4.0.x/javadoc-api/org/springframework/http/converter/HttpMessageConverter.html)) to convert the incoming JSON data into a `Page` object. From there, the contents of the `Page` object will be printed to the console.
+Because the Jackson JSON processing library is in the classpath, `RestTemplate` will use it (via a {HttpMessageConverter}[message converter]) to convert the incoming JSON data into a `Page` object. From there, the contents of the `Page` object will be printed to the console.
 
 Here you've only used `RestTemplate` to make an HTTP `GET` request. But `RestTemplate` also supports other HTTP verbs such as `POST`, `PUT`, and `DELETE`.
 
-<@build_an_executable_jar_subhead/>
+include::https://raw.github.com/spring-guides/getting-started-macros/master/build_an_executable_jar_subhead.adoc[]
 
-<@build_an_executable_jar_with_both/>
+include::https://raw.github.com/spring-guides/getting-started-macros/master/build_an_executable_jar_with_both.adoc[]
 
-<@run_the_application_with_both/>
+include::https://raw.github.com/spring-guides/getting-started-macros/master/run_the_application_with_both.adoc[]
 
 You should see the following output:
 
-```sh
+....
 Name:    Pivotal
 About:   At Pivotal, our mission is to enable customers to build a new class of applications, leveraging big and fast data, and do all of this with the power of cloud independence. 
 Phone:   650-286-8012
 Website: http://www.gopivotal.com
-```
+....
 
-Summary
-----------
+== Summary
 Congratulations! You have just developed a simple REST client using Spring.  
