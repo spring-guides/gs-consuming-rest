@@ -1,3 +1,7 @@
+---
+tags: [rest]
+projects: []
+---
 :spring_boot_version: 0.5.0.M6
 :RestTemplate: http://docs.spring.io/spring/docs/4.0.x/javadoc-api/org/springframework/web/client/RestTemplate.html
 :HttpMessageConverter: http://docs.spring.io/spring/docs/4.0.x/javadoc-api/org/springframework/http/converter/HttpMessageConverter.html
