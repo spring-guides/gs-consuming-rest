@@ -20,10 +20,10 @@ repositories {
 }
 
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter:1.0.0.RC1")
-    compile("org.springframework:spring-web:4.0.0.RELEASE")
-    compile("com.fasterxml.jackson.core:jackson-databind:2.2.2")
-    testCompile("junit:junit:4.11")
+    compile("org.springframework.boot:spring-boot-starter:1.0.0.RC2")
+    compile("org.springframework:spring-web")
+    compile("com.fasterxml.jackson.core:jackson-databind")
+    testCompile("junit:junit")
 }
 
 task wrapper(type: Wrapper) {
