@@ -19,19 +19,19 @@ You'll build an application that uses Spring's `RestTemplate` to retrieve a comp
 
 == What you'll need
 
-include::https://raw.github.com/spring-guides/getting-started-macros/master/prereq_editor_jdk_buildtools.adoc[]
+include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/prereq_editor_jdk_buildtools.adoc[]
 
-include::https://raw.github.com/spring-guides/getting-started-macros/master/how_to_complete_this_guide.adoc[]
+include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/how_to_complete_this_guide.adoc[]
 
 [[scratch]]
 == Set up the project
 
-include::https://raw.github.com/spring-guides/getting-started-macros/master/build_system_intro.adoc[]
+include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/build_system_intro.adoc[]
 
-include::https://raw.github.com/spring-guides/getting-started-macros/master/create_directory_structure_hello.adoc[]
+include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/create_directory_structure_hello.adoc[]
 
 
-include::https://raw.github.com/spring-guides/getting-started-macros/master/create_both_builds.adoc[]
+include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/create_both_builds.adoc[]
 
 `build.gradle`
 // AsciiDoc source formatting doesn't support groovy, so using java instead
@@ -40,7 +40,7 @@ include::https://raw.github.com/spring-guides/getting-started-macros/master/crea
 include::initial/build.gradle[]
 ----
 
-include::https://raw.github.com/spring-guides/getting-started-macros/master/spring-boot-gradle-plugin.adoc[]
+include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/spring-boot-gradle-plugin.adoc[]
 
 [[initial]]
 == Fetch a REST resource
@@ -122,11 +122,11 @@ Because the Jackson JSON processing library is in the classpath, `RestTemplate` 
 
 Here you've only used `RestTemplate` to make an HTTP `GET` request. But `RestTemplate` also supports other HTTP verbs such as `POST`, `PUT`, and `DELETE`.
 
-include::https://raw.github.com/spring-guides/getting-started-macros/master/build_an_executable_jar_subhead.adoc[]
+include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/build_an_executable_jar_subhead.adoc[]
 
-include::https://raw.github.com/spring-guides/getting-started-macros/master/build_an_executable_jar_with_both.adoc[]
+include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/build_an_executable_jar_with_both.adoc[]
 
-include::https://raw.github.com/spring-guides/getting-started-macros/master/run_the_application_with_both.adoc[]
+include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/run_the_application_with_both.adoc[]
 
 You should see the following output:
 
