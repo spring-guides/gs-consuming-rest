@@ -15,7 +15,7 @@ This guide walks you through the process of creating an application that consume
 
 You'll build an application that uses Spring's `RestTemplate` to retrieve a company's page data from Facebook's Graph API at:
 
-    http://graph.facebook.com/gopivotal
+    http://graph.facebook.com/pivotalsoftware
 
 == What you'll need
 
@@ -47,9 +47,9 @@ include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/
 
 With project setup complete, you can create a simple application that consumes a RESTful service.
 
-Suppose that you want to find out what Facebook knows about Pivotal. Knowing that Pivotal has a page on Facebook and that the ID is "gopivotal", you should be able to query Facebook's Graph API via this URL:
+Suppose that you want to find out what Facebook knows about Pivotal. Knowing that Pivotal has a page on Facebook and that the ID is "pivotalsoftware", you should be able to query Facebook's Graph API via this URL:
 
-    http://graph.facebook.com/gopivotal
+    http://graph.facebook.com/pivotalsoftware
 
 If you request that URL through your web browser or curl, you'll receive a JSON document that looks something like this:
 
@@ -57,38 +57,51 @@ If you request that URL through your web browser or curl, you'll receive a JSON 
 ----
 {
    "id": "161112704050757",
-   "about": "At Pivotal, our mission is to enable customers to build a new class of applications, leveraging big and fast data, and do all of this with the power of cloud independence. ",
-   "app_id": "0",
+   "about": "Pivotal is enabling the creation of modern software applications that leverage big & fast data \u2013 on a single, cloud independent platform.",
    "can_post": false,
    "category": "Internet/software",
-   "checkins": 0,
+   "category_list": [
+      {
+         "id": "108472109230615",
+         "name": "Computer Services"
+      }
+   ],
+   "checkins": 42,
    "cover": {
       "cover_id": 163344023827625,
-      "source": "http://sphotos-d.ak.fbcdn.net/hphotos-ak-frc1/s720x720/554668_163344023827625_839302172_n.png",
+      "offset_x": 0,
       "offset_y": 0,
-      "offset_x": 0
+      "source": "https://fbcdn-sphotos-d-a.akamaihd.net/hphotos-ak-xaf1/t1.0-9/s720x720/554668_163344023827625_839302172_n.png"
    },
+   "description": "Pivotal, the company at the intersection of big data, PaaS, and agile development, helps companies transform into great software companies. It starts with Pivotal One, a comprehensive solution that includes a set of application and data services that run on top of Pivotal CF, a turnkey platform-as-a-service (PaaS) solution for agile development teams to rapidly update and scale applications on a private cloud that can be instantly expanded and upgraded with no downtime, allowing enterprises to innovate with disruptive speed.\n\nREVOLUTIONARY COMPREHENSIVE PAAS\nPivotal One is a next generation PaaS that can be deployed on multiple cloud environments to deliver a turnkey experience for scaling and updating PaaS with no downtime. Pivotal One Services helps create a PaaS that no other vendor can offer in the industry by integrating differentiated data services such as Hadoop and visual analytics.\n\nSPEED TIME TO MARKET\nDriving the demand for PaaS is the trend of software being the competitive edge across all industries. This trend has unleashed a new generation of developers driving a deep shift in platforms and processes. These developers work in agile teams and demand a platform that allows them to continuously deliver updates to and horizontally scale their applications with no downtime. They seek standardized ways to plug in leading data services and perform deep user analytics on top of massive datasets to drive rapid iteration based on customer needs.\n\nABOUT PIVOTAL\nPivotal, committed to open source and open standards, is a leading provider of application and data infrastructure software, agile development services, and data science consulting. Follow Pivotal on Twitter \u0040gopivotal.",
    "founded": "2013",
    "has_added_app": false,
    "is_community_page": false,
    "is_published": true,
-   "likes": 126,
-   "link": "https://www.facebook.com/gopivotal",
+   "likes": 1022,
+   "link": "https://www.facebook.com/pivotalsoftware",
    "location": {
-      "street": "1900 South Norfolk St.",
-      "city": "San Mateo",
-      "state": "CA",
+      "city": "San Francisco",
       "country": "United States",
-      "zip": "94403",
-      "latitude": 37.552261,
-      "longitude": -122.292152
+      "latitude": 37.78199,
+      "longitude": -122.40406,
+      "state": "CA",
+      "street": "875 Howard St",
+      "zip": "94103"
    },
+   "mission": "Pivotal, the company at the intersection of big data, PaaS, and agile development, helps companies transform into great software companies. ",
    "name": "Pivotal",
-   "phone": "650-286-8012",
-   "talking_about_count": 15,
-   "username": "gopivotal",
+   "parking": {
+      "lot": 0,
+      "street": 0,
+      "valet": 0
+   },
+   "phone": "(650) 286-8012",
+   "products": "PaaS:\nPivotal One, Pivotal CF, Cloud Foundry\n\nDATA: Pivotal HD, Pivotal HD with GemFire XD, Pivotal Greenplum DB, Pivotal Data Dispatch,  Pivotal GemFire, Pivotal SQLFire, Redis\nPaaS: Pivotal One, Pivotal CF, Pivotal Web Services, Cloud Foundry\nDATA TOOLS: Pivotal VRP, Pivotal Command Center\nANALYTICS: MADlib, Pivotal GPText\nAPPLICATIONS: Pivotal tc Server, Pivotal Web Server, Pivotal RabbitMQ, Spring, vFabric Suite",
+   "talking_about_count": 77,
+   "username": "pivotalsoftware",
    "website": "http://www.gopivotal.com",
-   "were_here_count": 0
+   "were_here_count": 42
 }
 ----
 
@@ -96,7 +109,7 @@ Easy enough, but not terribly useful when fetched through a browser or through c
 
 A more useful way to consume a REST web service is programmatically. To help you with that task, Spring provides a convenient template class called {RestTemplate}[`RestTemplate`]. `RestTemplate` makes interacting with most RESTful services a one-line incantation. And it can even bind that data to custom domain types.
 
-First, create a domain class to contain the data that you need. If all you need to know are Pivotal's name, phone number, website URL, and what the gopivotal page is about, then the following domain class should do fine:
+First, create a domain class to contain the data that you need. If all you need to know are Pivotal's name, phone number, website URL, and what the pivotalsoftware page is about, then the following domain class should do fine:
 
 `src/main/java/hello/Page.java`
 [source,java]
