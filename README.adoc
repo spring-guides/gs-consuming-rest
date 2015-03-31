@@ -2,7 +2,7 @@
 tags: [rest]
 projects: []
 ---
-:spring_boot_version: 1.2.2.RELEASE
+:spring_boot_version: 1.2.3.RELEASE
 :RestTemplate: http://docs.spring.io/spring/docs/4.0.x/javadoc-api/org/springframework/web/client/RestTemplate.html
 :HttpMessageConverter: http://docs.spring.io/spring/docs/4.0.x/javadoc-api/org/springframework/http/converter/HttpMessageConverter.html
 :toc:
