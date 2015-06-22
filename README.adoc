@@ -3,19 +3,18 @@ tags: [rest]
 projects: []
 ---
 :spring_boot_version: 1.2.4.RELEASE
-:RestTemplate: http://docs.spring.io/spring/docs/4.0.x/javadoc-api/org/springframework/web/client/RestTemplate.html
-:HttpMessageConverter: http://docs.spring.io/spring/docs/4.0.x/javadoc-api/org/springframework/http/converter/HttpMessageConverter.html
+:RestTemplate: http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/client/RestTemplate.html
+:HttpMessageConverter: http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/http/converter/HttpMessageConverter.html
 :toc:
 :icons: font
 :source-highlighter: prettify
 :project_id: gs-consuming-rest
+
 This guide walks you through the process of creating an application that consumes a RESTful web service.
 
 == What you'll build
 
-You'll build an application that uses Spring's `RestTemplate` to retrieve a company's page data from Facebook's Graph API at:
-
-    http://graph.facebook.com/pivotalsoftware
+You'll build an application that uses Spring's `RestTemplate` to retrieve a random Spring Boot quotation at http://gturnquist-quoters.cfapps.io/api/random.
 
 == What you'll need
 
@@ -36,61 +35,18 @@ include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/
 
 With project setup complete, you can create a simple application that consumes a RESTful service.
 
-Suppose that you want to find out what Facebook knows about Pivotal. Knowing that Pivotal has a page on Facebook and that the ID is "pivotalsoftware", you should be able to query Facebook's Graph API via this URL:
-
-    http://graph.facebook.com/pivotalsoftware
+A RESTful service has been stood up at http://gturnquist-quoters.cfapps.io/api/random. It randomly fetches quotes about Spring Boot and returns them as a JSON document.
 
 If you request that URL through your web browser or curl, you'll receive a JSON document that looks something like this:
 
 [source,javascript]
 ----
 {
-   "id": "161112704050757",
-   "about": "Pivotal is enabling the creation of modern software applications that leverage big & fast data \u2013 on a single, cloud independent platform.",
-   "can_post": false,
-   "category": "Internet/software",
-   "category_list": [
-      {
-         "id": "108472109230615",
-         "name": "Computer Services"
-      }
-   ],
-   "checkins": 42,
-   "cover": {
-      "cover_id": 163344023827625,
-      "offset_x": 0,
-      "offset_y": 0,
-      "source": "https://fbcdn-sphotos-d-a.akamaihd.net/hphotos-ak-xaf1/t1.0-9/s720x720/554668_163344023827625_839302172_n.png"
-   },
-   "description": "Pivotal, the company at the intersection of big data, PaaS, and agile development, helps companies transform into great software companies. It starts with Pivotal One, a comprehensive solution that includes a set of application and data services that run on top of Pivotal CF, a turnkey platform-as-a-service (PaaS) solution for agile development teams to rapidly update and scale applications on a private cloud that can be instantly expanded and upgraded with no downtime, allowing enterprises to innovate with disruptive speed.\n\nREVOLUTIONARY COMPREHENSIVE PAAS\nPivotal One is a next generation PaaS that can be deployed on multiple cloud environments to deliver a turnkey experience for scaling and updating PaaS with no downtime. Pivotal One Services helps create a PaaS that no other vendor can offer in the industry by integrating differentiated data services such as Hadoop and visual analytics.\n\nSPEED TIME TO MARKET\nDriving the demand for PaaS is the trend of software being the competitive edge across all industries. This trend has unleashed a new generation of developers driving a deep shift in platforms and processes. These developers work in agile teams and demand a platform that allows them to continuously deliver updates to and horizontally scale their applications with no downtime. They seek standardized ways to plug in leading data services and perform deep user analytics on top of massive datasets to drive rapid iteration based on customer needs.\n\nABOUT PIVOTAL\nPivotal, committed to open source and open standards, is a leading provider of application and data infrastructure software, agile development services, and data science consulting. Follow Pivotal on Twitter \u0040gopivotal.",
-   "founded": "2013",
-   "has_added_app": false,
-   "is_community_page": false,
-   "is_published": true,
-   "likes": 1022,
-   "link": "https://www.facebook.com/pivotalsoftware",
-   "location": {
-      "city": "San Francisco",
-      "country": "United States",
-      "latitude": 37.78199,
-      "longitude": -122.40406,
-      "state": "CA",
-      "street": "875 Howard St",
-      "zip": "94103"
-   },
-   "mission": "Pivotal, the company at the intersection of big data, PaaS, and agile development, helps companies transform into great software companies. ",
-   "name": "Pivotal",
-   "parking": {
-      "lot": 0,
-      "street": 0,
-      "valet": 0
-   },
-   "phone": "(650) 286-8012",
-   "products": "PaaS:\nPivotal One, Pivotal CF, Cloud Foundry\n\nDATA: Pivotal HD, Pivotal HD with GemFire XD, Pivotal Greenplum DB, Pivotal Data Dispatch,  Pivotal GemFire, Pivotal SQLFire, Redis\nPaaS: Pivotal One, Pivotal CF, Pivotal Web Services, Cloud Foundry\nDATA TOOLS: Pivotal VRP, Pivotal Command Center\nANALYTICS: MADlib, Pivotal GPText\nAPPLICATIONS: Pivotal tc Server, Pivotal Web Server, Pivotal RabbitMQ, Spring, vFabric Suite",
-   "talking_about_count": 77,
-   "username": "pivotalsoftware",
-   "website": "http://www.gopivotal.com",
-   "were_here_count": 42
+   type: "success",
+   value: {
+      id: 10,
+      quote: "Really loving Spring Boot, makes stand alone Spring apps easy."
+   }
 }
 ----
 
@@ -100,19 +56,31 @@ A more useful way to consume a REST web service is programmatically. To help you
 
 First, create a domain class to contain the data that you need. If all you need to know are Pivotal's name, phone number, website URL, and what the pivotalsoftware page is about, then the following domain class should do fine:
 
-`src/main/java/hello/Page.java`
+`src/main/java/hello/Quote.java`
 [source,java]
 ----
-include::complete/src/main/java/hello/Page.java[]
+include::complete/src/main/java/hello/Quote.java[]
 ----
 
 As you can see, this is a simple Java class with a handful of properties and matching getter methods. It's annotated with `@JsonIgnoreProperties` from the Jackson JSON processing library to indicate that any properties not bound in this type should be ignored.
+
+It also uses Project Lombok's `@Data` annotation, which provides a getter, a setter, a toString, and other supporting methods.
+
+An additional class is needed to embed the inner quotation itself.
+
+`src/main/java/hello/Value.java`
+[source,java]
+----
+include::complete/src/main/java/hello/Value.java[]
+----
+
+This uses the same annotations but simply maps onto other data fields. 
 
 == Make the application executable
 
 Although it is possible to package this service as a traditional link:/understanding/WAR[WAR] file for deployment to an external application server, the simpler approach demonstrated below creates a standalone application. You package everything in a single, executable JAR file, driven by a good old Java `main()` method. Along the way, you use Spring's support for embedding the link:/understanding/Tomcat[Tomcat] servlet container as the HTTP runtime, instead of deploying to an external instance.
 
-Now you can write the `Application` class that uses `RestTemplate` to fetch the data from Pivotal's page at Facebook into a `Page` object.
+Now you can write the `Application` class that uses `RestTemplate` to fetch the data from our Spring Boot quotation service.
 
 `src/main/java/hello/Application.java`
 [source,java]
@@ -120,7 +88,7 @@ Now you can write the `Application` class that uses `RestTemplate` to fetch the 
 include::complete/src/main/java/hello/Application.java[]
 ----
 
-Because the Jackson JSON processing library is in the classpath, `RestTemplate` will use it (via a {HttpMessageConverter}[message converter]) to convert the incoming JSON data into a `Page` object. From there, the contents of the `Page` object will be printed to the console.
+Because the Jackson JSON processing library is in the classpath, `RestTemplate` will use it (via a {HttpMessageConverter}[message converter]) to convert the incoming JSON data into a `Quote` object. From there, the contents of the `Quote` object will be logged to the console.
 
 Here you've only used `RestTemplate` to make an HTTP `GET` request. But `RestTemplate` also supports other HTTP verbs such as `POST`, `PUT`, and `DELETE`.
 
@@ -132,10 +100,7 @@ include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/
 You should see the following output:
 
 ....
-Name:    Pivotal
-About:   At Pivotal, our mission is to enable customers to build a new class of applications, leveraging big and fast data, and do all of this with the power of cloud independence. 
-Phone:   650-286-8012
-Website: http://www.gopivotal.com
+2015-06-22 13:55:47.688  INFO 71932 --- [main] hello.Application    : Quote(type=success, value=Value(id=5, quote=Spring Boot solves this problem. It gets rid of XML and wires up common components for me, so I don't have to spend hours scratching my head just to figure out how it's all pieced together.))
 ....
 
 == Summary
