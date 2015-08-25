@@ -105,3 +105,6 @@ You should see the following output:
 
 == Summary
 Congratulations! You have just developed a simple REST client using Spring.  
+
+include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/footer.adoc[]
+
