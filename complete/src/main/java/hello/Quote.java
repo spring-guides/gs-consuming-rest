@@ -26,4 +26,12 @@ public class Quote {
     public void setValue(Value value) {
         this.value = value;
     }
+
+    @Override
+    public String toString() {
+        return "Quote{" +
+                "type='" + type + '\'' +
+                ", value=" + value +
+                '}';
+    }
 }

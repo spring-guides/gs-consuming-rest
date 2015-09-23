@@ -27,4 +27,11 @@ public class Value {
         this.quote = quote;
     }
 
+    @Override
+    public String toString() {
+        return "Value{" +
+                "id=" + id +
+                ", quote='" + quote + '\'' +
+                '}';
+    }
 }
