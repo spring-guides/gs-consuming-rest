@@ -100,7 +100,8 @@ include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/
 You should see the following output:
 
 ....
-2015-06-22 13:55:47.688  INFO 71932 --- [main] hello.Application    : Quote(type=success, value=Value(id=5, quote=Spring Boot solves this problem. It gets rid of XML and wires up common components for me, so I don't have to spend hours scratching my head just to figure out how it's all pieced together.))
+....
+2015-09-23 14:22:26.415  INFO 23613 --- [main] hello.Application  : Quote{type='success', value=Value{id=12, quote='@springboot with @springframework is pure productivity! Who said in #java one has to write double the code than in other langs? #newFavLib'}}
 ....
 
 == Summary
