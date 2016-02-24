@@ -64,8 +64,6 @@ include::complete/src/main/java/hello/Quote.java[]
 
 As you can see, this is a simple Java class with a handful of properties and matching getter methods. It's annotated with `@JsonIgnoreProperties` from the Jackson JSON processing library to indicate that any properties not bound in this type should be ignored.
 
-It also uses Project Lombok's `@Data` annotation, which provides a getter, a setter, a toString, and other supporting methods.
-
 An additional class is needed to embed the inner quotation itself.
 
 `src/main/java/hello/Value.java`
