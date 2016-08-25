@@ -1,6 +1,6 @@
 ---
-tags: [rest]
-projects: []
+tags: [rest,http,client]
+projects: [spring-boot,spring-framework]
 ---
 :spring_boot_version: 1.4.0.RELEASE
 :RestTemplate: http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/client/RestTemplate.html
