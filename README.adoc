@@ -82,7 +82,7 @@ Now you can write the `Application` class that uses `RestTemplate` to fetch the 
 
 `src/main/java/hello/Application.java`
 [source,java,indent=0]
----
+----
 public class Application {
 
     private static final Logger log = LoggerFactory.getLogger(Application.class);
@@ -94,7 +94,7 @@ public class Application {
     }
 
 }
----
+----
 
 Because the Jackson JSON processing library is in the classpath, `RestTemplate` will use it (via a {HttpMessageConverter}[message converter]) to convert the incoming JSON data into a `Quote` object. From there, the contents of the `Quote` object will be logged to the console.
 
