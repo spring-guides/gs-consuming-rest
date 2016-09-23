@@ -123,6 +123,8 @@ You should see the following output:
 2015-09-23 14:22:26.415  INFO 23613 --- [main] hello.Application  : Quote{type='success', value=Value{id=12, quote='@springboot with @springframework is pure productivity! Who said in #java one has to write double the code than in other langs? #newFavLib'}}
 ....
 
+NOTE: if you see an error and `Could not extract response: no suitable HttpMessageConverter found for response type [class hello.Quote]` it's possible you are in an environment that cannot connect to the backend service (which sends JSON if you can reach it). Maybe you are behind a corporate proxy? Try setting the standard system properties `http.proxyHost` and `http.proxyPort` to values appropriate for your environment.
+
 == Summary
 Congratulations! You have just developed a simple REST client using Spring.  
 
