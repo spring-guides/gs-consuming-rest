@@ -54,7 +54,7 @@ Easy enough, but not terribly useful when fetched through a browser or through c
 
 A more useful way to consume a REST web service is programmatically. To help you with that task, Spring provides a convenient template class called {RestTemplate}[`RestTemplate`]. `RestTemplate` makes interacting with most RESTful services a one-line incantation. And it can even bind that data to custom domain types.
 
-First, create a domain class to contain the data that you need. If all you need to know are Pivotal's name, phone number, website URL, and what the pivotalsoftware page is about, then the following domain class should do fine:
+First, create a domain class to contain the data that you need.
 
 `src/main/java/hello/Quote.java`
 [source,java]
@@ -117,13 +117,13 @@ include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/
 include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/build_an_executable_jar_with_both.adoc[]
 
 
-You should see the following output:
+You should see output like the following, with a random quote:
 
 ....
 2015-09-23 14:22:26.415  INFO 23613 --- [main] hello.Application  : Quote{type='success', value=Value{id=12, quote='@springboot with @springframework is pure productivity! Who said in #java one has to write double the code than in other langs? #newFavLib'}}
 ....
 
-NOTE: if you see an error and `Could not extract response: no suitable HttpMessageConverter found for response type [class hello.Quote]` it's possible you are in an environment that cannot connect to the backend service (which sends JSON if you can reach it). Maybe you are behind a corporate proxy? Try setting the standard system properties `http.proxyHost` and `http.proxyPort` to values appropriate for your environment.
+NOTE: If you see the error `Could not extract response: no suitable HttpMessageConverter found for response type [class hello.Quote]` it's possible you are in an environment that cannot connect to the backend service (which sends JSON if you can reach it). Maybe you are behind a corporate proxy? Try setting the standard system properties `http.proxyHost` and `http.proxyPort` to values appropriate for your environment.
 
 == Summary
 Congratulations! You have just developed a simple REST client using Spring.  
