@@ -64,6 +64,8 @@ include::complete/src/main/java/hello/Quote.java[]
 
 As you can see, this is a simple Java class with a handful of properties and matching getter methods. It's annotated with `@JsonIgnoreProperties` from the Jackson JSON processing library to indicate that any properties not bound in this type should be ignored.
 
+In order for you to directly bind your data to your custom types, you need to specify the variable name exact same as the key in the JSON Document returned from the API. In case your variable name and key in JSON doc are not matching, you need to use `@JsonProperty` annotation to specify the exact key of JSON document.
+
 An additional class is needed to embed the inner quotation itself.
 
 `src/main/java/hello/Value.java`
