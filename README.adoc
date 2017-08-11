@@ -74,7 +74,7 @@ An additional class is needed to embed the inner quotation itself.
 include::complete/src/main/java/hello/Value.java[]
 ----
 
-This uses the same annotations but simply maps onto other data fields. 
+This uses the same annotations but simply maps onto other data fields.
 
 == Make the application executable
 
@@ -104,7 +104,7 @@ Here you've only used `RestTemplate` to make an HTTP `GET` request. But `RestTem
 
 == Managing the Application Lifecycle with Spring Boot
 
-So far we haven't used Spring Boot in our application, but there are some advantages in doing so, and it isn't hard to do. One of the advantages is that we might want to let Spring Boot manage the message converters in the `RestTemplate`, so that customizations are easy to add declaratively. To do that we use `@SpringBootApplication` on the main class and convert the main method to start it up, like in any Spring Boot application. Finally we move the `RestTemplate` to a `CommandLineRunner` callback so it is executed by Spring Boot on startup: 
+So far we haven't used Spring Boot in our application, but there are some advantages in doing so, and it isn't hard to do. One of the advantages is that we might want to let Spring Boot manage the message converters in the `RestTemplate`, so that customizations are easy to add declaratively. To do that we use `@SpringBootApplication` on the main class and convert the main method to start it up, like in any Spring Boot application. Finally we move the `RestTemplate` to a `CommandLineRunner` callback so it is executed by Spring Boot on startup:
 
 `src/main/java/hello/Application.java`
 [source,java]
@@ -112,7 +112,7 @@ So far we haven't used Spring Boot in our application, but there are some advant
 include::complete/src/main/java/hello/Application.java[]
 ----
 
-The `RestTemplateBuilder` is injected by Spring, and if you use it to create a `RestTemplate` then you will benefit from all the autoconfiguration that happens in Spring Boot with message converters and request factories. We also extract the `RestTemplate` into a `@Bean` to make it easier to test (it can be mocked more easily that way). 
+The `RestTemplateBuilder` is injected by Spring, and if you use it to create a `RestTemplate` then you will benefit from all the autoconfiguration that happens in Spring Boot with message converters and request factories. We also extract the `RestTemplate` into a `@Bean` to make it easier to test (it can be mocked more easily that way).
 
 include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/build_an_executable_jar_subhead.adoc[]
 
@@ -128,7 +128,25 @@ You should see output like the following, with a random quote:
 NOTE: If you see the error `Could not extract response: no suitable HttpMessageConverter found for response type [class hello.Quote]` it's possible you are in an environment that cannot connect to the backend service (which sends JSON if you can reach it). Maybe you are behind a corporate proxy? Try setting the standard system properties `http.proxyHost` and `http.proxyPort` to values appropriate for your environment.
 
 == Summary
-Congratulations! You have just developed a simple REST client using Spring.  
+Congratulations! You have just developed a simple REST client using Spring.
+
+== See Also
+
+The following guides may also be helpful:
+
+* https://spring.io/guides/gs/rest-service/[Building a RESTful Web Service]
+* https://spring.io/guides/gs/consuming-rest-angularjs/[Consuming a RESTful Web Service with AngularJS]
+* https://spring.io/guides/gs/consuming-rest-jquery/[Consuming a RESTful Web Service with jQuery]
+* https://spring.io/guides/gs/consuming-rest-restjs/[Consuming a RESTful Web Service with rest.js]
+* https://spring.io/guides/gs/accessing-gemfire-data-rest/[Accessing GemFire Data with REST]
+* https://spring.io/guides/gs/accessing-mongodb-data-rest/[Accessing MongoDB Data with REST]
+* https://spring.io/guides/gs/accessing-data-mysql/[Accessing data with MySQL]
+* https://spring.io/guides/gs/accessing-data-rest/[Accessing JPA Data with REST]
+* https://spring.io/guides/gs/accessing-neo4j-data-rest/[Accessing Neo4j Data with REST]
+* https://spring.io/guides/gs/securing-web/[Securing a Web Application]
+* https://spring.io/guides/gs/spring-boot/[Building an Application with Spring Boot]
+* https://spring.io/guides/gs/testing-restdocs/[Creating API Documentation with Restdocs]
+* https://spring.io/guides/gs/rest-service-cors/[Enabling Cross Origin Requests for a RESTful Web Service]
+* https://spring.io/guides/gs/rest-hateoas/[Building a Hypermedia-Driven RESTful Web Service]
 
 include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/footer.adoc[]
-
