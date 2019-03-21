@@ -1,6 +1,6 @@
 :spring_boot_version: 2.1.3.RELEASE
-:RestTemplate: http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/client/RestTemplate.html
-:HttpMessageConverter: http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/http/converter/HttpMessageConverter.html
+:RestTemplate: https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/client/RestTemplate.html
+:HttpMessageConverter: https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/http/converter/HttpMessageConverter.html
 :toc:
 :icons: font
 :source-highlighter: prettify
@@ -10,7 +10,7 @@ This guide walks you through the process of creating an application that consume
 
 == What you'll build
 
-You'll build an application that uses Spring's `RestTemplate` to retrieve a random Spring Boot quotation at http://gturnquist-quoters.cfapps.io/api/random.
+You'll build an application that uses Spring's `RestTemplate` to retrieve a random Spring Boot quotation at https://gturnquist-quoters.cfapps.io/api/random.
 
 == What you'll need
 
@@ -31,7 +31,7 @@ include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/
 
 With project setup complete, you can create a simple application that consumes a RESTful service.
 
-A RESTful service has been stood up at http://gturnquist-quoters.cfapps.io/api/random. It randomly fetches quotes about Spring Boot and returns them as a JSON document.
+A RESTful service has been stood up at https://gturnquist-quoters.cfapps.io/api/random. It randomly fetches quotes about Spring Boot and returns them as a JSON document.
 
 If you request that URL through your web browser or curl, you'll receive a JSON document that looks something like this:
 
@@ -95,7 +95,7 @@ public class Application {
 
     public static void main(String args[]) {
         RestTemplate restTemplate = new RestTemplate();
-        Quote quote = restTemplate.getForObject("http://gturnquist-quoters.cfapps.io/api/random", Quote.class);
+        Quote quote = restTemplate.getForObject("https://gturnquist-quoters.cfapps.io/api/random", Quote.class);
         log.info(quote.toString());
     }
 
