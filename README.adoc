@@ -6,35 +6,129 @@
 :source-highlighter: prettify
 :project_id: gs-consuming-rest
 
-This guide walks you through the process of creating an application that consumes a RESTful web service.
+This guide walks you through the process of creating an application that consumes a
+RESTful web service.
 
-== What you'll build
+== What You Will Build
 
-You'll build an application that uses Spring's `RestTemplate` to retrieve a random Spring Boot quotation at https://gturnquist-quoters.cfapps.io/api/random.
+You will build an application that uses Spring's `RestTemplate` to retrieve a random
+Spring Boot quotation at https://gturnquist-quoters.cfapps.io/api/random.
 
-== What you'll need
+== What You Need
 
 :java_version: 1.8
 include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/prereq_editor_jdk_buildtools.adoc[]
 
 include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/how_to_complete_this_guide.adoc[]
 
-include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/hide-show-gradle.adoc[]
+== Starting with Spring Initializr
 
-include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/hide-show-maven.adoc[]
+For all Spring applications, you should start with the https://start.spring.io[Spring
+Initializr]. The Initializr offers a fast way to pull in all the dependencies you need for
+an application and does a lot of the set up for you. Because this example needs to be
+nothing more than a web application, you need to include only the Web dependency. The
+following image shows the Initializr set up for this sample project:
 
-include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/hide-show-sts.adoc[]
+image::images/initializr.jpg[]
 
+NOTE: The preceding image shows the Initializr with Maven chosen as the build tool. You
+can also use Gradle. It also shows values of `com.example` and `consuming-rest` as the
+Group and Artifact, respectively. You will use those values throughout the rest of this sample.
+
+The following listing shows the `pom.xml` file created when you choose Maven:
+
+====
+[src,xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.1.7.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.example</groupId>
+	<artifactId>consuming-rest</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>consuming-rest</name>
+	<description>Demo project for Spring Boot</description>
+
+	<properties>
+		<java.version>1.8</java.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
+----
+====
+
+The following listing shows the `build.gradle` file created when you choose Gradle:
+
+====
+[src,gradle]
+----
+plugins {
+	id 'org.springframework.boot' version '2.1.7.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+	id 'java'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+----
+====
+
+These build files can be this simple because `spring-boot-starter-web` includes everything
+you need to build a web application, including the Jackson classes you need to work with
+JSON.
 
 [[initial]]
-== Fetch a REST resource
+== Fetching a REST Resource
 
-With project setup complete, you can create a simple application that consumes a RESTful service.
+With project setup complete, you can create a simple application that consumes a RESTful
+service.
 
-A RESTful service has been stood up at https://gturnquist-quoters.cfapps.io/api/random. It randomly fetches quotes about Spring Boot and returns them as a JSON document.
+A RESTful service has been stood up at https://gturnquist-quoters.cfapps.io/api/random.
+It randomly fetches quotations about Spring Boot and returns them as JSON documents.
 
-If you request that URL through your web browser or curl, you'll receive a JSON document that looks something like this:
+If you request that URL through your a web browser or curl, you receive a JSON document
+that looks something like this:
 
+====
 [source,javascript]
 ----
 {
@@ -45,94 +139,98 @@ If you request that URL through your web browser or curl, you'll receive a JSON 
    }
 }
 ----
+====
 
-Easy enough, but not terribly useful when fetched through a browser or through curl.
+That is easy enough but not terribly useful when fetched through a browser or through curl.
 
-A more useful way to consume a REST web service is programmatically. To help you with that task, Spring provides a convenient template class called {RestTemplate}[`RestTemplate`]. `RestTemplate` makes interacting with most RESTful services a one-line incantation. And it can even bind that data to custom domain types.
+A more useful way to consume a REST web service is programmatically. To help you with that
+task, Spring provides a convenient template class called {RestTemplate}[`RestTemplate`].
+`RestTemplate` makes interacting with most RESTful services a one-line incantation. And it
+can even bind that data to custom domain types.
 
-First, create a domain class to contain the data that you need.
+First, you need to create a domain class to contain the data that you need. The following
+listing shows the `Quote` class, which you can use as your domain class:
 
-`src/main/java/hello/Quote.java`
+`src/main/java/com/example/consumingrest/Quote.java`
 [source,java]
 ----
-include::complete/src/main/java/hello/Quote.java[]
+include::complete/src/main/java/com/example/consumingrest/Quote.java[]
 ----
 
-As you can see, this is a simple Java class with a handful of properties and matching getter methods. It's annotated with `@JsonIgnoreProperties` from the Jackson JSON processing library to indicate that any properties not bound in this type should be ignored.
+This simple Java class has a handful of properties and matching
+getter methods. It is annotated with `@JsonIgnoreProperties` from the Jackson JSON
+processing library to indicate that any properties not bound in this type should be ignored.
 
-In order for you to directly bind your data to your custom types, you need to specify the variable name exact same as the key in the JSON Document returned from the API. In case your variable name and key in JSON doc are not matching, you need to use `@JsonProperty` annotation to specify the exact key of JSON document.
+To directly bind your data to your custom types, you need to specify the
+variable name to be exactly the same as the key in the JSON document returned from the API.
+In case your variable name and key in JSON doc do not match, you can use `@JsonProperty`
+annotation to specify the exact key of the JSON document. (This example matches each
+variable name to a JSON key, so do not need that annotation here.)
 
-An additional class is needed to embed the inner quotation itself.
+You also need an additional class, to embed the inner quotation itself. The `Value` class
+fills that need and is shown in the following listing (at
+`src/main/java/com/example/consumingrest/Value.java`):
 
-`src/main/java/hello/Value.java`
+====
 [source,java]
 ----
-include::complete/src/main/java/hello/Value.java[]
+include::complete/src/main/java/com/example/consumingrest/Value.java[]
 ----
+====
 
-This uses the same annotations but simply maps onto other data fields.
+This uses the same annotations but maps onto other data fields.
 
-== Make the application executable
+== Finishing the Application
 
-Although it is possible to package this service as a traditional link:/understanding/WAR[WAR] file for deployment to an external application server, the simpler approach demonstrated below creates a standalone application. You package everything in a single, executable JAR file, driven by a good old Java `main()` method. Along the way, you use Spring's support for embedding the link:/understanding/Tomcat[Tomcat] servlet container as the HTTP runtime, instead of deploying to an external instance.
+The Initalizr creates a class with a `main()` method. The following listing shows the
+class the Initializr creates (at
+`src/main/java/com/example/consumingrest/ConsumingRestApplication.java`):
 
-Now you can write the `Application` class that uses `RestTemplate` to fetch the data from our Spring Boot quotation service.
-
-`src/main/java/hello/Application.java`
-[source,java,indent=0]
+====
+[src,Java]
 ----
-package hello;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.client.RestTemplate;
-
-public class Application {
-
-    private static final Logger log = LoggerFactory.getLogger(Application.class);
-
-    public static void main(String args[]) {
-        RestTemplate restTemplate = new RestTemplate();
-        Quote quote = restTemplate.getForObject("https://gturnquist-quoters.cfapps.io/api/random", Quote.class);
-        log.info(quote.toString());
-    }
-
-}
+include::initial/src/main/java/com/example/consumingrest/ConsumingRestApplication.java[]
 ----
+====
 
-Because the Jackson JSON processing library is in the classpath, `RestTemplate` will use it (via a {HttpMessageConverter}[message converter]) to convert the incoming JSON data into a `Quote` object. From there, the contents of the `Quote` object will be logged to the console.
+Now you need to add a few other things to the `ConsumingRestApplication` class to get it to
+show quotations from our RESTful source. You need to add:
 
-Here you've only used `RestTemplate` to make an HTTP `GET` request. But `RestTemplate` also supports other HTTP verbs such as `POST`, `PUT`, and `DELETE`.
+* A logger, to send output to the log (the console, in this example).
+* A `RestTemplate`, which uses the Jackson JSON processing library to process the incoming
+data.
+* A `CommandLineRunner` that runs the `RestTemplate` (and, consequently, fetches our
+quotation) on startup.
 
-== Managing the Application Lifecycle with Spring Boot
+The following listing shows the finished `ConsumingRestApplication` class (at
+`src/main/java/com/example/consumingrest/ConsumingRestApplication.java`):
 
-So far we haven't used Spring Boot in our application, but there are some advantages in doing so, and it isn't hard to do. One of the advantages is that we might want to let Spring Boot manage the message converters in the `RestTemplate`, so that customizations are easy to add declaratively. To do that we use `@SpringBootApplication` on the main class and convert the main method to start it up, like in any Spring Boot application. Finally we move the `RestTemplate` to a `CommandLineRunner` callback so it is executed by Spring Boot on startup:
-
-`src/main/java/hello/Application.java`
-[source,java]
+====
+[src,Java]
 ----
-include::complete/src/main/java/hello/Application.java[]
+include::complete/src/main/java/com/example/consumingrest/ConsumingRestApplication.java[]
 ----
+====
 
-The `RestTemplateBuilder` is injected by Spring, and if you use it to create a `RestTemplate` then you will benefit from all the autoconfiguration that happens in Spring Boot with message converters and request factories. We also extract the `RestTemplate` into a `@Bean` to make it easier to test (it can be mocked more easily that way).
-
-include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/build_an_executable_jar_subhead.adoc[]
+== Running the Application
 
 include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/build_an_executable_jar_with_both.adoc[]
 
-
-You should see output like the following, with a random quote:
+You should see output similar to the following but with a random quotation:
 
 ....
-2015-09-23 14:22:26.415  INFO 23613 --- [main] hello.Application  : Quote{type='success', value=Value{id=12, quote='@springboot with @springframework is pure productivity! Who said in #java one has to write double the code than in other langs? #newFavLib'}}
+2019-08-22 14:06:46.506  INFO 42940 --- [           main] c.e.c.ConsumingRestApplication           : Quote{type='success', value=Value{id=1, quote='Working with Spring Boot is like pair-programming with the Spring developers.'}}
 ....
 
-NOTE: If you see the error `Could not extract response: no suitable HttpMessageConverter found for response type [class hello.Quote]` it's possible you are in an environment that cannot connect to the backend service (which sends JSON if you can reach it). Maybe you are behind a corporate proxy? Try setting the standard system properties `http.proxyHost` and `http.proxyPort` to values appropriate for your environment.
+NOTE: If you see an error that reads, `Could not extract response: no suitable
+HttpMessageConverter found for response type [class com.example.consumingrest.Quote]`, it
+is possible that you are in an environment that cannot connect to the backend service
+(which sends JSON if you can reach it). Maybe you are behind a corporate proxy. Try
+setting the `http.proxyHost` and `http.proxyPort` system properties to values appropriate
+for your environment.
 
 == Summary
-Congratulations! You have just developed a simple REST client using Spring.
+Congratulations! You have just developed a simple REST client by using Spring Boot.
 
 == See Also
 

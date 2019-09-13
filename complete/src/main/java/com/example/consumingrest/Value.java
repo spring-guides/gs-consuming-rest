@@ -1,4 +1,4 @@
-package hello;
+package com.example.consumingrest;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
