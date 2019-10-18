@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package hello;
+package com.example.consumingrest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -27,8 +27,8 @@ import org.springframework.web.client.RestTemplate;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ApplicationTest {
-	
+public class ConsumingRestApplicationTest {
+
 	@Autowired
 	private RestTemplate restTemplate;
 
