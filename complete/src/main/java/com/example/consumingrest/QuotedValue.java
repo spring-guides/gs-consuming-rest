@@ -3,12 +3,12 @@ package com.example.consumingrest;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Value {
+public class QuotedValue {
 
     private Long id;
     private String quote;
 
-    public Value() {
+    public QuotedValue() {
     }
 
     public Long getId() {
@@ -29,7 +29,7 @@ public class Value {
 
     @Override
     public String toString() {
-        return "Value{" +
+        return "QuotedValue{" +
                 "id=" + id +
                 ", quote='" + quote + '\'' +
                 '}';
