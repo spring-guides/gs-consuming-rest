@@ -130,7 +130,7 @@ If you request that URL through your a web browser or curl, you receive a JSON d
 that looks something like this:
 
 ====
-[source,javascript]
+[source,java,tabsize=2script]
 ----
 {
    type: "success",
@@ -153,7 +153,7 @@ First, you need to create a domain class to contain the data that you need. The 
 listing shows the `Quote` class, which you can use as your domain class:
 
 `src/main/java/com/example/consumingrest/Quote.java`
-[source,java]
+[source,java,tabsize=2]
 ----
 include::complete/src/main/java/com/example/consumingrest/Quote.java[]
 ----
@@ -173,7 +173,7 @@ fills that need and is shown in the following listing (at
 `src/main/java/com/example/consumingrest/Value.java`):
 
 ====
-[source,java]
+[source,java,tabsize=2]
 ----
 include::complete/src/main/java/com/example/consumingrest/Value.java[]
 ----
