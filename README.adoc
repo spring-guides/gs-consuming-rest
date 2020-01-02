@@ -1,4 +1,4 @@
-:spring_boot_version: 2.2.1.RELEASE
+:spring_boot_version: 2.2.2.RELEASE
 :RestTemplate: http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/client/RestTemplate.html
 :HttpMessageConverter: http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/http/converter/HttpMessageConverter.html
 :toc:
