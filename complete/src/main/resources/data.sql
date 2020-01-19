@@ -1,0 +1,1 @@
+insert into Quote VALUES ( 1,'body','titre',1 );
