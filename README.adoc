@@ -166,7 +166,7 @@ To directly bind your data to your custom types, you need to specify the
 variable name to be exactly the same as the key in the JSON document returned from the API.
 In case your variable name and key in JSON doc do not match, you can use `@JsonProperty`
 annotation to specify the exact key of the JSON document. (This example matches each
-variable name to a JSON key, so we do not need that annotation here.)
+variable name to a JSON key, so you do not need that annotation here.)
 
 You also need an additional class, to embed the inner quotation itself. The `Value` class
 fills that need and is shown in the following listing (at
@@ -188,7 +188,7 @@ class the Initializr creates (at
 `src/main/java/com/example/consumingrest/ConsumingRestApplication.java`):
 
 ====
-[source,java,tabsize=2]
+[source,java]
 ----
 include::initial/src/main/java/com/example/consumingrest/ConsumingRestApplication.java[]
 ----
@@ -207,7 +207,7 @@ The following listing shows the finished `ConsumingRestApplication` class (at
 `src/main/java/com/example/consumingrest/ConsumingRestApplication.java`):
 
 ====
-[source,java,tabsize=2]
+[source,java]
 ----
 include::complete/src/main/java/com/example/consumingrest/ConsumingRestApplication.java[]
 ----
