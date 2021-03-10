@@ -12,7 +12,7 @@ RESTful web service.
 == What You Will Build
 
 You will build an application that uses Spring's `RestTemplate` to retrieve a random
-Spring Boot quotation at https://gturnquist-quoters.cfapps.io/api/random.
+Spring Boot quotation at https://quoters.apps.pcfone.io/api/random.
 
 == What You Need
 
@@ -24,10 +24,7 @@ include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/
 [[scratch]]
 == Starting with Spring Initializr
 
-For all Spring applications, you can start with the https://start.spring.io[Spring
-Initializr]. The Initializr offers a fast way to pull in all the dependencies you need for
-an application and does a lot of the set up for you. Because this example needs to be
-nothing more than a web application, you need to include only the Web dependency.
+If you use Maven, visit the https://start.spring.io/#!type=maven-project&language=java&platformVersion=2.4.3.RELEASE&packaging=jar&jvmVersion=1.8&groupId=com.example&artifactId=consuming-rest&name=consuming-rest&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.consuming-rest&dependencies=web[Spring Initializr] to generate a new project with the required dependency (Spring Web).
 
 The following listing shows the `pom.xml` file created when you choose Maven:
 
@@ -37,6 +34,8 @@ The following listing shows the `pom.xml` file created when you choose Maven:
 include::initial/pom.xml[]
 ----
 ====
+
+If you use Gradle, visit the https://start.spring.io/#!type=gradle-project&language=java&platformVersion=2.4.3.RELEASE&packaging=jar&jvmVersion=1.8&groupId=com.example&artifactId=consuming-rest&name=consuming-rest&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.consuming-rest&dependencies=web[Spring Initializr] to generate a new project with the required dependency (Spring Web).
 
 The following listing shows the `build.gradle` file created when you choose Gradle:
 
@@ -50,13 +49,26 @@ These build files can be this simple because `spring-boot-starter-web` includes 
 you need to build a web application, including the Jackson classes you need to work with
 JSON.
 
+=== Manual Initialization (optional)
+
+If you want to initialize the project manually rather than use the links shown earlier, follow the steps given below:
+
+. Navigate to https://start.spring.io.
+This service pulls in all the dependencies you need for an application and does most of the setup for you.
+. Choose either Gradle or Maven and the language you want to use. This guide assumes that you chose Java.
+. Click *Dependencies* and select *Spring Web*.
+. Click *Generate*.
+. Download the resulting ZIP file, which is an archive of a web application that is configured with your choices.
+
+NOTE: If your IDE has the Spring Initializr integration, you can complete this process from your IDE.
+
 [[initial]]
 == Fetching a REST Resource
 
 With project setup complete, you can create a simple application that consumes a RESTful
 service.
 
-A RESTful service has been stood up at https://gturnquist-quoters.cfapps.io/api/random.
+A RESTful service has been stood up at https://quoters.apps.pcfone.io/api/random.
 It randomly fetches quotations about Spring Boot and returns them as JSON documents.
 
 If you request that URL through a web browser or curl, you receive a JSON document
