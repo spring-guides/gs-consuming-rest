@@ -12,7 +12,7 @@ RESTful web service.
 == What You Will Build
 
 You will build an application that uses Spring's `RestTemplate` to retrieve a random
-Spring Boot quotation at https://quoters.apps.pcfone.io/api/random.
+Spring Boot quotation at http://localhost:8080/api/random.
 
 == What You Need
 
@@ -45,8 +45,13 @@ NOTE: You can also fork the project from Github and open it in your IDE or other
 With project setup complete, you can create a simple application that consumes a RESTful
 service.
 
-A RESTful service has been stood up at https://quoters.apps.pcfone.io/api/random.
-It randomly fetches quotations about Spring Boot and returns them as JSON documents.
+Before you can do so, you need a source of REST resources.
+We have provided an example of such a service at https://github.com/spring-guides/quoters/api,
+(which shows all the quotations).
+You can run that application in a separate terminal and access the result at http://localhost:8080/api/random.
+That address randomly fetches a quotation about Spring Boot and returns it as a JSON document.
+Other valid addresses http://localhost:8080/api/1 (for the first quotation), http://localhost:8080/api/2
+(for the second quotation), and so on.
 
 If you request that URL through a web browser or curl, you receive a JSON document
 that looks something like this:

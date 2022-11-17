@@ -27,7 +27,7 @@ public class ConsumingRestApplication {
 	public CommandLineRunner run(RestTemplate restTemplate) throws Exception {
 		return args -> {
 			Quote quote = restTemplate.getForObject(
-					"https://quoters.apps.pcfone.io/api/random", Quote.class);
+					"http://localhost:8080/api/random", Quote.class);
 			log.info(quote.toString());
 		};
 	}
