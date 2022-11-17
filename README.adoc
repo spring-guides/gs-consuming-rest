@@ -46,8 +46,7 @@ With project setup complete, you can create a simple application that consumes a
 service.
 
 Before you can do so, you need a source of REST resources.
-We have provided an example of such a service at https://github.com/spring-guides/quoters,
-(which shows all the quotations).
+We have provided an example of such a service at https://github.com/spring-guides/quoters.
 You can run that application in a separate terminal and access the result at http://localhost:8080/api/random.
 That address randomly fetches a quotation about Spring Boot and returns it as a JSON document.
 Other valid addresses include http://localhost:8080/api/ (for all the quotations)
