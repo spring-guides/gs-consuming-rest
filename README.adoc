@@ -76,7 +76,7 @@ task, Spring provides a convenient template class called {RestTemplate}[`RestTem
 can even bind that data to custom domain types.
 
 First, you need to create a domain class to contain the data that you need. The following
-listing shows the `Quote` class, which you can use as your domain class:
+listing shows the `Quote` record class, which you can use as your domain class:
 
 `src/main/java/com/example/consumingrest/Quote.java`
 [source,java,tabsize=2]
@@ -84,8 +84,7 @@ listing shows the `Quote` class, which you can use as your domain class:
 include::complete/src/main/java/com/example/consumingrest/Quote.java[]
 ----
 
-This simple Java class has a handful of properties and matching
-getter methods. It is annotated with `@JsonIgnoreProperties` from the Jackson JSON
+This simple Java record class is annotated with `@JsonIgnoreProperties` from the Jackson JSON
 processing library to indicate that any properties not bound in this type should be ignored.
 
 To directly bind your data to your custom types, you need to specify the
@@ -94,8 +93,8 @@ In case your variable name and key in JSON doc do not match, you can use `@JsonP
 annotation to specify the exact key of the JSON document. (This example matches each
 variable name to a JSON key, so you do not need that annotation here.)
 
-You also need an additional class, to embed the inner quotation itself. The `Value` class
-fills that need and is shown in the following listing (at
+You also need an additional class, to embed the inner quotation itself. The `Value` record
+class fills that need and is shown in the following listing (at
 `src/main/java/com/example/consumingrest/Value.java`):
 
 ====
