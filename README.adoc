@@ -108,7 +108,7 @@ This uses the same annotations but maps onto other data fields.
 
 == Finishing the Application
 
-The Initalizr creates a class with a `main()` method. The following listing shows the
+The Initializr creates a class with a `main()` method. The following listing shows the
 class the Initializr creates (at
 `src/main/java/com/example/consumingrest/ConsumingRestApplication.java`):
 
