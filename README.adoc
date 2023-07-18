@@ -140,7 +140,7 @@ include::complete/src/main/java/com/example/consumingrest/ConsumingRestApplicati
 
 Finally, you need to set the server port. The quoters application uses the default 
 server port, 8080, so this application cannot also use the same port. You can set 
-the server port to 8081 by adding the following line to applicaiton properties 
+the server port to 8081 by adding the following line to application properties 
 (which the Initializr created for you):
 
 ----
