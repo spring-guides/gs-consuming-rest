@@ -1,6 +1,4 @@
-:spring_boot_version: current
 :RestTemplate: http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/client/RestTemplate.html
-:HttpMessageConverter: http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/http/converter/HttpMessageConverter.html
 :toc:
 :icons: font
 :source-highlighter: prettify
