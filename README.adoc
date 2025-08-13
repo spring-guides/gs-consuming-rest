@@ -27,14 +27,14 @@ To manually initialize the project:
 
 . Navigate to https://start.spring.io.
 This service pulls in all the dependencies you need for an application and does most of the setup for you.
-. Choose either Gradle or Maven and the language you want to use. This guide assumes that you chose Java.
+. Choose either Gradle or Maven and the language you want to use.
 . Click *Dependencies* and select *Spring Web*.
 . Click *Generate*.
 . Download the resulting ZIP file, which is an archive of a web application that is configured with your choices.
 
 NOTE: If your IDE has the Spring Initializr integration, you can complete this process from your IDE.
 
-NOTE: You can also fork the project from Github and open it in your IDE or other editor.
+NOTE: You can also fork the project from GitHub and open it in your IDE or other editor.
 
 [[initial]]
 == Fetching a REST Resource
@@ -73,16 +73,21 @@ task, Spring provides a convenient template class called {RestTemplate}[`RestTem
 `RestTemplate` makes interacting with most RESTful services a one-line incantation. And it
 can even bind that data to custom domain types.
 
-First, you need to create a domain class to contain the data that you need. The following
-listing shows the `Quote` record class, which you can use as your domain class:
+First, you need to create a domain class, a Java record class or Kotlin data class, to contain the data that you need.
+The following listing shows the `Quote` class, which you can use as your domain class:
 
-`src/main/java/com/example/consumingrest/Quote.java`
-[source,java,tabsize=2]
+[source,java,indent=0,subs="verbatim,quotes",role="primary"]
+.Java
 ----
 include::complete/src/main/java/com/example/consumingrest/Quote.java[]
 ----
+[source,kotlin,indent=0,subs="verbatim,quotes",role="secondary"]
+.Kotlin
+----
+include::complete-kotlin/src/main/kotlin/com/example/consumingrest/Quote.kt[]
+----
 
-This simple Java record class is annotated with `@JsonIgnoreProperties` from the Jackson JSON
+The domain class is annotated with `@JsonIgnoreProperties` from the Jackson JSON
 processing library to indicate that any properties not bound in this type should be ignored.
 
 To directly bind your data to your custom types, you need to specify the
@@ -91,14 +96,19 @@ In case your variable name and key in JSON doc do not match, you can use `@JsonP
 annotation to specify the exact key of the JSON document. (This example matches each
 variable name to a JSON key, so you do not need that annotation here.)
 
-You also need an additional class, to embed the inner quotation itself. The `Value` record
-class fills that need and is shown in the following listing (at
-`src/main/java/com/example/consumingrest/Value.java`):
+You also need an additional domain class to embed the inner quotation itself. The `Value` class fills that need,
+as the following listing shows:
 
 ====
-[source,java,tabsize=2]
+[source,java,indent=0,subs="verbatim,quotes",role="primary"]
+.Java
 ----
 include::complete/src/main/java/com/example/consumingrest/Value.java[]
+----
+[source,kotlin,indent=0,subs="verbatim,quotes",role="secondary"]
+.Kotlin
+----
+include::complete-kotlin/src/main/kotlin/com/example/consumingrest/Value.kt[]
 ----
 ====
 
@@ -106,14 +116,18 @@ This uses the same annotations but maps onto other data fields.
 
 == Finishing the Application
 
-The Initializr creates a class with a `main()` method. The following listing shows the
-class the Initializr creates (at
-`src/main/java/com/example/consumingrest/ConsumingRestApplication.java`):
+The Initializr creates a class with a `main()` method, as the following listing shows:
 
 ====
-[source,java]
+[source,java,indent=0,subs="verbatim,quotes",role="primary"]
+.Java
 ----
 include::initial/src/main/java/com/example/consumingrest/ConsumingRestApplication.java[]
+----
+[source,kotlin,indent=0,subs="verbatim,quotes",role="secondary"]
+.Kotlin
+----
+include::initial-kotlin/src/main/kotlin/com/example/consumingrest/ConsumingRestApplication.kt[]
 ----
 ====
 
@@ -126,13 +140,18 @@ data.
 * A `CommandLineRunner` that runs the `RestTemplate` (and, consequently, fetches our
 quotation) on startup.
 
-The following listing shows the finished `ConsumingRestApplication` class (at
-`src/main/java/com/example/consumingrest/ConsumingRestApplication.java`):
+The following listing shows the finished `ConsumingRestApplication` class:
 
 ====
-[source,java]
+[source,java,indent=0,subs="verbatim,quotes",role="primary"]
+.Java
 ----
 include::complete/src/main/java/com/example/consumingrest/ConsumingRestApplication.java[]
+----
+[source,kotlin,indent=0,subs="verbatim,quotes",role="secondary"]
+.Kotlin
+----
+include::complete-kotlin/src/main/kotlin/com/example/consumingrest/ConsumingRestApplication.kt[]
 ----
 ====
 
