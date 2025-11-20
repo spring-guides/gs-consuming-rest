@@ -13,6 +13,10 @@ import org.springframework.web.client.getForObject
 @SpringBootApplication
 class ConsumingRestApplication {
 
+    companion object {
+        private val log = LoggerFactory.getLogger(ConsumingRestApplication::class.java)
+    }
+
     @Bean
     fun restTemplate(builder: RestTemplateBuilder): RestTemplate {
         return builder.build()
@@ -23,10 +27,6 @@ class ConsumingRestApplication {
     fun run(restTemplate: RestTemplate) = CommandLineRunner {
         val quote = restTemplate.getForObject<Quote>("http://localhost:8080/api/random")
         log.info(quote.toString())
-    }
-
-    companion object {
-        private val log = LoggerFactory.getLogger(ConsumingRestApplication::class.java)
     }
 }
 
