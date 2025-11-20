@@ -10,12 +10,10 @@ import org.springframework.context.annotation.Profile
 import org.springframework.web.client.RestTemplate
 import org.springframework.web.client.getForObject
 
+private val log = LoggerFactory.getLogger(ConsumingRestApplication::class.java)
+
 @SpringBootApplication
 class ConsumingRestApplication {
-
-    companion object {
-        private val log = LoggerFactory.getLogger(ConsumingRestApplication::class.java)
-    }
 
     @Bean
     fun restTemplate(builder: RestTemplateBuilder): RestTemplate {
