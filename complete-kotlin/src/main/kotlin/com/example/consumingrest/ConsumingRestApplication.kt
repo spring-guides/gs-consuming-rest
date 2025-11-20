@@ -8,6 +8,7 @@ import org.springframework.boot.web.client.RestTemplateBuilder
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Profile
 import org.springframework.web.client.RestTemplate
+import org.springframework.web.client.getForObject
 
 @SpringBootApplication
 class ConsumingRestApplication {
@@ -20,10 +21,7 @@ class ConsumingRestApplication {
     @Bean
     @Profile("!test")
     fun run(restTemplate: RestTemplate) = CommandLineRunner {
-        val quote = restTemplate.getForObject(
-            "http://localhost:8080/api/random",
-            Quote::class.java
-        )
+        val quote = restTemplate.getForObject<Quote>("http://localhost:8080/api/random")
         log.info(quote.toString())
     }
 
