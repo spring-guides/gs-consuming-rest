@@ -1,4 +1,4 @@
-:RestTemplate: http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/client/RestTemplate.html
+:RestClient: https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/client/RestClient.html
 :toc:
 :icons: font
 :source-highlighter: prettify
@@ -21,14 +21,14 @@ include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/
 [[scratch]]
 == Starting with Spring Initializr
 
-You can use this https://start.spring.io/#!type=maven-project&groupId=com.example&artifactId=consuming-rest&name=consuming-rest&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.consuming-rest&dependencies=web[pre-initialized project] and click Generate to download a ZIP file. This project is configured to fit the examples in this tutorial.
+You can use this https://start.spring.io/#!type=gradle-project&language=java&packaging=jar&groupId=com.example&artifactId=consuming-rest&name=consuming-rest&packageName=com.example.consuming-rest&dependencies=spring-restclient[pre-initialized project] and click Generate to download a ZIP file. This project is configured to fit the examples in this tutorial.
 
 To manually initialize the project:
 
 . Navigate to https://start.spring.io.
 This service pulls in all the dependencies you need for an application and does most of the setup for you.
 . Choose either Gradle or Maven and the language you want to use.
-. Click *Dependencies* and select *Spring Web*.
+. Click *Dependencies* and select *HTTP Client*.
 . Click *Generate*.
 . Download the resulting ZIP file, which is an archive of a web application that is configured with your choices.
 
@@ -69,8 +69,8 @@ that looks something like this:
 That is easy enough but not terribly useful when fetched through a browser or through curl.
 
 A more useful way to consume a REST web service is programmatically. To help you with that
-task, Spring provides a convenient template class called {RestTemplate}[`RestTemplate`].
-`RestTemplate` makes interacting with most RESTful services a one-line incantation. And it
+task, Spring provides a convenient template class called {RestClient}[`RestClient`].
+`RestClient` makes interacting with most RESTful services a one-line incantation. And it
 can even bind that data to custom domain types.
 
 First, you need to create a domain class, a Java record class or Kotlin data class, to contain the data that you need.
@@ -135,10 +135,8 @@ Now you need to add a few other things to the `ConsumingRestApplication` class t
 show quotations from our RESTful source. You need to add:
 
 * A logger, to send output to the log (the console, in this example).
-* A `RestTemplate`, which uses the Jackson JSON processing library to process the incoming
-data.
-* A `CommandLineRunner` that runs the `RestTemplate` (and, consequently, fetches our
-quotation) on startup.
+* A `CommandLineRunner` that builds a `RestClient` instance with the auto-configured `RestClient.Builder`
+ and uses it to fetch our quotation on startup.
 
 The following listing shows the finished `ConsumingRestApplication` class:
 
@@ -155,14 +153,6 @@ include::complete-kotlin/src/main/kotlin/com/example/consumingrest/ConsumingRest
 ----
 ====
 
-Finally, you need to set the server port. The quoters application uses the default 
-server port, 8080, so this application cannot also use the same port. You can set 
-the server port to 8081 by adding the following line to application properties 
-(which the Initializr created for you):
-
-----
-server.port=8081
-----
 
 == Running the Application
 
