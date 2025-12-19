@@ -13,22 +13,22 @@ import org.springframework.web.client.RestClient;
 @SpringBootApplication
 public class ConsumingRestApplication {
 
-	private static final Logger log = LoggerFactory.getLogger(ConsumingRestApplication.class);
+  private static final Logger log = LoggerFactory.getLogger(ConsumingRestApplication.class);
 
-	public static void main(String[] args) {
-		SpringApplication.run(ConsumingRestApplication.class, args);
-	}
+  public static void main(String[] args) {
+    SpringApplication.run(ConsumingRestApplication.class, args);
+  }
 
-	@Bean
-	@Profile("!test")
-	public ApplicationRunner run(RestClient.Builder builder) {
-		RestClient restClient = builder.baseUrl("http://localhost:8080").build();
-		return args -> {
-			Quote quote = restClient
-					.get().uri("/api/random")
-					.retrieve()
-					.body(Quote.class);
-			log.info(quote.toString());
-		};
-	}
+  @Bean
+  @Profile("!test")
+  public ApplicationRunner run(RestClient.Builder builder) {
+    RestClient restClient = builder.baseUrl("http://localhost:8080").build();
+    return args -> {
+      Quote quote = restClient
+          .get().uri("/api/random")
+          .retrieve()
+          .body(Quote.class);
+      log.info(quote.toString());
+    };
+  }
 }

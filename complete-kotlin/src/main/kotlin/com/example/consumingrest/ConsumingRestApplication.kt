@@ -14,15 +14,15 @@ private val log = LoggerFactory.getLogger(ConsumingRestApplication::class.java)
 @SpringBootApplication
 class ConsumingRestApplication {
 
-    @Bean
-    @Profile("!test")
-    fun run(builder: RestClient.Builder) = ApplicationRunner {
-        val quote = builder.build().get().uri("http://localhost:8080/api/random")
-            .retrieve().toEntity<Quote>()
-        log.info(quote.toString())
-    }
+  @Bean
+  @Profile("!test")
+  fun run(builder: RestClient.Builder) = ApplicationRunner {
+    val quote = builder.build().get().uri("http://localhost:8080/api/random")
+      .retrieve().toEntity<Quote>()
+    log.info(quote.toString())
+  }
 }
 
 fun main(args: Array<String>) {
-    runApplication<ConsumingRestApplication>(*args)
+  runApplication<ConsumingRestApplication>(*args)
 }
